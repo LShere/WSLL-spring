@@ -12,10 +12,13 @@ public class controller {
     //    this.serviceDao = serviceDao;
     //}
 
-    @Resource(name = "userService")
+    @Autowired
     private serviceDao serviceDao;
 
     public void print() {
-        this.serviceDao.printfUser();
+        this.serviceDao.add();
+        //this.serviceDao.printfUser();
     }
+
+
 }
