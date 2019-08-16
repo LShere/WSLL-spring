@@ -28,4 +28,9 @@ public class serviceDaoImpl implements serviceDao {
     public void delete() {
 
     }
+
+    public void transferAccounts(double money) {
+        this.userDao.transferAccounts(money);
+    }
+
 }

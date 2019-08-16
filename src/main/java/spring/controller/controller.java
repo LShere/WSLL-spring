@@ -14,8 +14,10 @@ public class controller {
     private serviceDao serviceDao;
 
     public void print() {
-        this.serviceDao.add();
+        //this.serviceDao.add();
         //this.serviceDao.printfUser();
+        //模拟转账
+        this.serviceDao.transferAccounts(100);
     }
 
 

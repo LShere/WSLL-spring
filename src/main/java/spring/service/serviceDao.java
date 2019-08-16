@@ -6,4 +6,5 @@ public interface serviceDao {
     void add();
     void update();
     void delete();
+    void transferAccounts(double money);
 }

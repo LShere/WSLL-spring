@@ -44,7 +44,8 @@
     </bean>
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+<!--            <tx:method name="*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>-->
+            <tx:method name="transferAccounts" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
         </tx:attributes>
     </tx:advice>
     <aop:config>
