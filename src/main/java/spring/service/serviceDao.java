@@ -1,4 +1,4 @@
-package service;
+package spring.service;
 
 public interface serviceDao {
     void printfUser();

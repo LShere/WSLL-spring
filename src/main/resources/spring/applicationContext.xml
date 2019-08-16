@@ -3,43 +3,52 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
-<!--    <context:annotation-config/>-->
-<!--    <bean id="userDao" class="dao.impl.UserDaoImpl"/>-->
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-    <!--    <bean id="testAop" class="aspect.aspect"/>-->
+    <context:component-scan base-package="spring.*"/>
+    <aop:aspectj-autoproxy/>
+
+    <!--    <spring.bean id="testAop" class="spring.aspect.spring.aspect"/>-->
     <!--    <aop:config>-->
-    <!--        <aop:aspect id="myAspect" ref="testAop">-->
-    <!--            <aop:pointcut expression="execution(* auto.service.*.*(..))" id="myPointcut"/>-->
+    <!--        <aop:spring.aspect id="myAspect" ref="testAop">-->
+    <!--            <aop:pointcut expression="execution(* auto.spring.service.*.*(..))" id="myPointcut"/>-->
     <!--            <aop:before method="before" pointcut-ref="myPointcut"/>-->
     <!--            <aop:after method="after" pointcut-ref="myPointcut"/>-->
     <!--            <aop:around method="around" pointcut-ref="myPointcut"/>-->
-    <!--        </aop:aspect>-->
+    <!--        </aop:spring.aspect>-->
     <!--    </aop:config>-->
-    <!--    <aop:aspectj-autoproxy/>-->
-    <context:component-scan base-package="controller"/>
-    <context:component-scan base-package="dao"/>
-    <context:component-scan base-package="service"/>
 
+    <!--JDBC-->
+    <context:property-placeholder location="db.properties"/>
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/spring?useSSL=false&amp;serverTimezone=UTC"/>
-        <property name="username" value="root"/>
-        <property name="password" value="0000"/>
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
     </bean>
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-<!--    <bean id="userDao" class="dao.impl.UserDaoImpl">-->
-<!--        <property name="jdbcTemplate" ref="jdbcTemplate"/>-->
-<!--    </bean>-->
-<!--    <bean id="userService" class="service.serviceDaoImpl"/>-->
-<!--    <bean id="controller" class="controller.controller"/>-->
 
-
+    <!--事务-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut expression="execution(* spring.dao.*.*(..))" id="myPointcut"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="myPointcut"/>
+    </aop:config>
 </beans>

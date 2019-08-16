@@ -1,14 +1,12 @@
-package controller;
+package spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import service.serviceDao;
-
-import javax.annotation.Resource;
+import spring.service.serviceDao;
 
 @Controller
 public class controller {
-    //public void setServiceDao(service.serviceDao serviceDao) {
+    //public void setServiceDao(spring.service.serviceDao serviceDao) {
     //    this.serviceDao = serviceDao;
     //}
 

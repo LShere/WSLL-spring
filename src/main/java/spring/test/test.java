@@ -1,9 +1,9 @@
-package test;
+package spring.test;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import dao.UserDao;
+import spring.dao.UserDao;
 
 public class test {
     public static void main(String[] args) {

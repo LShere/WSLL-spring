@@ -1,4 +1,4 @@
-package bean;
+package spring.bean;
 
 public class User {
     String name;

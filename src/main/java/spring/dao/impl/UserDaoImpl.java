@@ -1,7 +1,7 @@
-package dao.impl;
+package spring.dao.impl;
 
-import bean.User;
-import dao.UserDao;
+import spring.bean.User;
+import spring.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -31,13 +31,11 @@ public class UserDaoImpl implements UserDao {
     public void add() {
         String sql = "insert into test(name) values ('xin')";
         jdbcTemplate.execute(sql);
-        //RowMapper<User> userRowMapper = new BeanPropertyRowMapper<User>(User.class);
-        //List<User> users = this.jdbcTemplate.query(sql,userRowMapper);
-        //System.out.println("数据长度是：" + users.size());
     }
 
     public void update() {
-
+        String sql = "insert into test(name) values ('xin')";
+        jdbcTemplate.execute(sql);
     }
 
     public void delete() {

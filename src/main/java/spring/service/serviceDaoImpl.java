@@ -1,10 +1,8 @@
-package service;
+package spring.service;
 
-import dao.UserDao;
+import spring.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 @Service
 public class serviceDaoImpl implements serviceDao {

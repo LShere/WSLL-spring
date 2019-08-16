@@ -1,6 +1,6 @@
-package test;
+package spring.test;
 
-import controller.controller;
+import spring.controller.controller;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
