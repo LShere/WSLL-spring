@@ -10,7 +10,8 @@ public class TestMybatis {
     private static SqlSession sqlSession = MybatisUtils.getSession();
 
     public static void main(String[] args) {
-        update();
+        selectIf();
+        //update();
     }
 
     private static void insert() {
@@ -37,4 +38,18 @@ public class TestMybatis {
         }
     }
 
+    private static void selectIf() {
+        Customer customer = new Customer();
+        customer.setCustomerNumber(1);
+        customer.setCustomerName("lin");
+        try {
+            List<Customer> customers = sqlSession.selectList("spring.mapper"
+                    + ".select-if",customer);
+            for (Customer customer1 : customers) {
+                System.out.println(customer1.getCustomerName());
+            }
+        } finally {
+            sqlSession.close();
+        }
+    }
 }

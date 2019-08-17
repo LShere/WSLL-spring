@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.mapper">
+    <select id="findGoods" parameterType="good"
+            resultType="good">
+        select * from goods
+        <where>
+            <if test="id !=null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="goodsname !=null and goodsname != ''">
+                <bind name="pattern_goodsname" value="'%'+_parameter.getGoodsname()+'%'"/>
+                and goodsname like #{pattern_goodsname}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addGood" parameterType="good">
+        insert into goods(goodsname,price,quantity) values (#{goodsname},#{price},#{quantity})
+    </insert>
+
+    <delete id="deleteGoodById" parameterType="int">
+        delete from goods where id = #{id}
+    </delete>
+
+    <update id="updateGoodById" parameterType="good">
+        update goods
+        <set>
+            <if test="goodsname !=null and goodsname != ''">
+                goodsname = #{goodsname},
+            </if>
+            <if test="price !=null and price != ''">
+                price = #{price},
+            </if>
+            <if test="quantity !=null and quantity != ''">
+                quantity = #{quantity}
+            </if>
+        </set>
+        where id =#{id}
+    </update>
+
+</mapper>

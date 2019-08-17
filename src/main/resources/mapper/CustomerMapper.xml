@@ -9,4 +9,15 @@
     <update id="update" parameterType="customer">
 		update customers set customerName =#{customerName} where customerNumber = #{customerNumber}
 	</update>
+    <select id="select-if" parameterType="customer" resultType="customer">
+        select * from customers
+        <where>
+            <if test="customerNumber !=null and customerNumber !=''">
+                and customerNumber like concat('%',#{customerNumber}, '%')
+            </if>
+            <if test="customerName !=null and customerName !=''">
+                and customerName= #{customerName}
+            </if>
+        </where>
+    </select>
 </mapper>
