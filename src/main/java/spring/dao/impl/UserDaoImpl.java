@@ -13,10 +13,6 @@ import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
-    //public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-    //    this.jdbcTemplate = jdbcTemplate;
-    //}
-
     @Autowired
     public JdbcTemplate jdbcTemplate;
 
