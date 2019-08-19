@@ -1,9 +1,20 @@
 package spring.bean;
 
+import java.util.List;
+
 public class Office {
     private String officeCode;
     private String city;
     private String phone;
+    private List<Employee> employees;
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
 
     public String getOfficeCode() {
         return officeCode;

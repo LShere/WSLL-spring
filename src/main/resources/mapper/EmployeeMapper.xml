@@ -13,4 +13,9 @@
         select *
         from employees
     </select>
+    <select id="findEmployeeByOfficeCode" resultType="employee">
+        select employeeNumber,lastName
+        from employees
+        where officeCode = #{officeCode}
+    </select>
 </mapper>
