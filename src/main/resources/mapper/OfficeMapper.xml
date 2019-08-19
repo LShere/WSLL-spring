@@ -9,7 +9,10 @@
         <collection property="employees" column="officeCode" ofType="employee"
                     select="spring.mapper.findEmployeeByOfficeCode"/>
     </resultMap>
-
+    <select id="findOffice" resultType="office">
+        select * from offices
+        where officeCode = #{officeCode}
+    </select>
 
     <select id="findOfficeEmployee" resultMap="Two">
         select *
