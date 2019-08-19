@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.mapper">
+    <resultMap id="MyResult" type="employee">
+        <id property="employeeNumber" column="employeeNumber"/>
+        <result property="officeCode" column="officeCode"/>
+        <result property="lastName" column="lastName"/>
+        <result property="firstName" column="firstName"/>
+        <association property="office" column="officeCode" javaType="office" select="spring.mapper.findOffice"/>
+    </resultMap>
+    <select id="findEmployees" resultMap="MyResult">
+        select *
+        from employees
+    </select>
+</mapper>
