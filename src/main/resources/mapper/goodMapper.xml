@@ -40,4 +40,14 @@
         where id =#{id}
     </update>
 
+    <select id="findGoodsByTypeId" parameterType="Integer"
+            resultType="good">
+        select * from goods where 1=1
+<!--        <where>-->
+            <if test="typeid !=null and typeid != ''">
+                and typeid = #{typeid}
+            </if>
+<!--        </where>-->
+    </select>
+
 </mapper>

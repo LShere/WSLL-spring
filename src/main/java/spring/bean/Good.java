@@ -5,6 +5,15 @@ public class Good {
     private String goodsname;
     private double price;
     private int quantity;
+    private int typeid;
+
+    public int getTypeid() {
+        return typeid;
+    }
+
+    public void setTypeid(int typeid) {
+        this.typeid = typeid;
+    }
 
     public int getId() {
         return id;
