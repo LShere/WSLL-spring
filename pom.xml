@@ -42,7 +42,7 @@
                             <maxIdleTime>30000</maxIdleTime>
                         </connector>
                     </connectors>
-                    <webAppSourceDirectory>${project.build.directory}/${pom.artifactId}-${pom.version}
+                    <webAppSourceDirectory>${project.basedir}/src/main/webapp
                     </webAppSourceDirectory>
                     <contextPath>/</contextPath>
                 </configuration>
