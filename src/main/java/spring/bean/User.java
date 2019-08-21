@@ -2,6 +2,7 @@ package spring.bean;
 
 public class User {
     String name;
+    double balance;
 
     public double getBalance() {
         return balance;
@@ -10,10 +11,6 @@ public class User {
     public void setBalance(double balance) {
         this.balance = balance;
     }
-
-    double balance;
-
-
 
     public String getName() {
         return name;

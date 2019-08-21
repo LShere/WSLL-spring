@@ -2,7 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="spring.dao.UserDaoMapper">
-    <select id="findUser" resultType="spring.bean.User">
+    <select id="findUser" resultType="user">
 		select * from test
+	</select>
+    <select id="findUserByName" resultType="user">
+		select * from test where name=#{name}
 	</select>
 </mapper>

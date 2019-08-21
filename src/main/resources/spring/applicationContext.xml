@@ -13,7 +13,7 @@
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
     <context:component-scan base-package="spring.*"/>
-    <aop:aspectj-autoproxy/>
+<!--    <aop:aspectj-autoproxy/>-->
 
     <!--    <spring.bean id="testAop" class="spring.aspect.spring.aspect"/>-->
     <!--    <aop:config>-->
@@ -39,19 +39,19 @@
     </bean>
 
     <!--事务-->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <!--            <tx:method name="*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>-->
-            <tx:method name="transferAccounts" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
-        </tx:attributes>
-    </tx:advice>
-    <aop:config>
-        <aop:pointcut expression="execution(* spring.dao.*.*(..))" id="myPointcut"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="myPointcut"/>
-    </aop:config>
+<!--    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+<!--        <property name="dataSource" ref="dataSource"/>-->
+<!--    </bean>-->
+<!--    <tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+<!--        <tx:attributes>-->
+<!--            &lt;!&ndash;            <tx:method name="*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>&ndash;&gt;-->
+<!--            <tx:method name="transferAccounts" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>-->
+<!--        </tx:attributes>-->
+<!--    </tx:advice>-->
+<!--    <aop:config>-->
+<!--        <aop:pointcut expression="execution(* spring.dao.*.*(..))" id="myPointcut"/>-->
+<!--        <aop:advisor advice-ref="txAdvice" pointcut-ref="myPointcut"/>-->
+<!--    </aop:config>-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:Mybatis-config.xml"/>

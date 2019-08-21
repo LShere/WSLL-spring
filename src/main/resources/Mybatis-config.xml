@@ -12,6 +12,7 @@
         <typeAlias alias="employee" type="spring.bean.Employee"/>
         <typeAlias alias="office" type="spring.bean.Office"/>
         <typeAlias alias="goodType" type="spring.bean.GoodType"/>
+        <typeAlias alias="user" type="spring.bean.User"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">
@@ -30,5 +31,6 @@
         <mapper resource="mapper/EmployeeMapper.xml"/>
         <mapper resource="mapper/officeMapper.xml"/>
         <mapper resource="mapper/GoodTypeMapper.xml"/>
+<!--        <mapper resource="mapper/UserDaoMapper.xml"/>-->
     </mappers>
 </configuration>
