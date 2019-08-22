@@ -15,7 +15,7 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
     <!--Controller层注解扫描-->
-    <context:component-scan base-package="mvc.controller"/>
+    <context:component-scan base-package="spring.controller"/>
     <!--配置视图解析器-->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
@@ -24,7 +24,7 @@
     <!--加载注解驱动-->
     <mvc:annotation-driven/>
     <!--    <mvc:resources location="/js/" mapping="/js/**"/>-->
-    <!--    <bean name="/firstController" class="mvc.controller.FirstController"/>-->
+    <!--    <bean name="/firstController" class="spring.controller.FirstController"/>-->
     <!-- 处理器映射器，将处理器Handle的name作为url进行查找 -->
     <!--    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>-->
     <!-- 处理器适配器，配置对处理器中handleRequest()方法的调用-->

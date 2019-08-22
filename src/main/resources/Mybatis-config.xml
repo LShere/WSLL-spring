@@ -9,12 +9,7 @@
 <!--        <setting name="logImpl" value="STDOUT_LOGGING"/>-->
 <!--    </settings>-->
     <typeAliases>
-        <typeAlias alias="customer" type="spring.pojo.Customer"/>
-        <typeAlias alias="good" type="spring.pojo.Good"/>
-        <typeAlias alias="employee" type="spring.pojo.Employee"/>
-        <typeAlias alias="office" type="spring.pojo.Office"/>
-        <typeAlias alias="goodType" type="spring.pojo.GoodType"/>
-        <typeAlias alias="user" type="spring.pojo.User"/>
+<!--        <typeAlias alias="user" type="spring.pojo.User"/>-->
     </typeAliases>
 <!--    <environments default="development">-->
 <!--        <environment id="development">-->

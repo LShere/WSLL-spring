@@ -1,13 +1,11 @@
-package mvc.controller;
+package spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.pojo.User;
-import spring.service.ServiceDaoMapper;
+import spring.service.ServiceDao;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +14,7 @@ import java.util.List;
 @Controller
 public class FirstController {
     @Autowired
-    private ServiceDaoMapper serviceDaoMapper;
+    private ServiceDao serviceDao;
 
     @RequestMapping(value = "/firstController")
     public ModelAndView handleRequest(HttpServletRequest httpServletRequest,
@@ -45,9 +43,9 @@ public class FirstController {
     public List<User> axiosNoPara() {
         //ApplicationContext applicationContext = new ClassPathXmlApplicationContext("/spring/applicationContext.xml");
         //MapperController mapperController = (MapperController) applicationContext.getBean("mapperController");
-        List<User> users = serviceDaoMapper.findUser();
+        List<User> users = serviceDao.findUser();
         for (User user : users) {
-            System.out.println(user.getName());
+            System.out.println(user.getUsername());
         }
         return users;
     }
@@ -63,7 +61,7 @@ public class FirstController {
     @RequestMapping("/test2")
     @ResponseBody
     public List<User> test2() {
-        List<User> users = serviceDaoMapper.findUser();
+        List<User> users = serviceDao.findUser();
         System.out.println(users);
         return users;
     }
