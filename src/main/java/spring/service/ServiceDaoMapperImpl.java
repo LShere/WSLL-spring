@@ -2,14 +2,15 @@ package spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import spring.bean.User;
+import org.springframework.transaction.annotation.Transactional;
+import spring.pojo.User;
 import spring.dao.UserDaoMapper;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ServiceDaoMapperImpl implements ServiceDaoMapper {
-
     @Autowired
     private UserDaoMapper userDaoMapper;
 

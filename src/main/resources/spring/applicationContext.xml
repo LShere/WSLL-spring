@@ -12,10 +12,9 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-    <context:component-scan base-package="spring.*"/>
-<!--    <aop:aspectj-autoproxy/>-->
+    <!--    <aop:aspectj-autoproxy/>-->
 
-    <!--    <spring.bean id="testAop" class="spring.aspect.spring.aspect"/>-->
+    <!--    <spring.pojo id="testAop" class="spring.aspect.spring.aspect"/>-->
     <!--    <aop:config>-->
     <!--        <aop:spring.aspect id="myAspect" ref="testAop">-->
     <!--            <aop:pointcut expression="execution(* auto.spring.service.*.*(..))" id="myPointcut"/>-->
@@ -34,32 +33,43 @@
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
     </bean>
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+    <!--    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
+    <!--        <property name="dataSource" ref="dataSource"/>-->
+    <!--    </bean>-->
 
     <!--事务-->
-<!--    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
-<!--        <property name="dataSource" ref="dataSource"/>-->
-<!--    </bean>-->
-<!--    <tx:advice id="txAdvice" transaction-manager="transactionManager">-->
-<!--        <tx:attributes>-->
-<!--            &lt;!&ndash;            <tx:method name="*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>&ndash;&gt;-->
-<!--            <tx:method name="transferAccounts" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>-->
-<!--        </tx:attributes>-->
-<!--    </tx:advice>-->
-<!--    <aop:config>-->
-<!--        <aop:pointcut expression="execution(* spring.dao.*.*(..))" id="myPointcut"/>-->
-<!--        <aop:advisor advice-ref="txAdvice" pointcut-ref="myPointcut"/>-->
-<!--    </aop:config>-->
+    <!--    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+    <!--        <property name="dataSource" ref="dataSource"/>-->
+    <!--    </bean>-->
+    <!--    <tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+    <!--        <tx:attributes>-->
+    <!--            &lt;!&ndash;            <tx:method name="*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>&ndash;&gt;-->
+    <!--            <tx:method name="transferAccounts" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>-->
+    <!--        </tx:attributes>-->
+    <!--    </tx:advice>-->
+    <!--    <aop:config>-->
+    <!--        <aop:pointcut expression="execution(* spring.dao.*.*(..))" id="myPointcut"/>-->
+    <!--        <aop:advisor advice-ref="txAdvice" pointcut-ref="myPointcut"/>-->
+    <!--    </aop:config>-->
+
+    <!--事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--开启事务注解-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!--配置MyBatis工厂-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:Mybatis-config.xml"/>
-        <property name="mapperLocations" value="classpath:mapper/UserDaoMapper.xml" />
+         <property name="mapperLocations" value="classpath:mapper/UserDaoMapper.xml"/>
     </bean>
-    <!-- Mapper代理开发（基于MapperScannerConfigurer） -->
+    <!--Mapper代理开发（基于MapperScannerConfigurer）-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="spring.dao"/>
     </bean>
+    <!--注解扫描-->
+    <context:component-scan base-package="spring.*"/>
+
 
 </beans>

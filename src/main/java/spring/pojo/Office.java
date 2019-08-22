@@ -1,4 +1,4 @@
-package spring.bean;
+package spring.pojo;
 
 import java.util.List;
 

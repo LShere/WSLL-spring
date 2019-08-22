@@ -1,6 +1,6 @@
 package spring.dao;
 
-import spring.bean.User;
+import spring.pojo.User;
 
 import java.util.List;
 

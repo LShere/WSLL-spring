@@ -1,4 +1,4 @@
-package spring.bean;
+package spring.pojo;
 
 public class Good {
     private int id;
