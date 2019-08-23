@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import spring.pojo.User;
 import spring.service.ServiceDao;
+import spring.token.TokenUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,16 +31,20 @@ public class loginController {
         Map<String, Object> map = new HashMap<String, Object>();
         User SqlUser = serviceDao.findUserByName(username);
         if (SqlUser == null) {
-            map.put("login", "failed");
+            map.put("code", "10");
             map.put("message", "用户名不存在!");
             return map;
         }
         if (SqlUser.getPassword().equals(password)) {
-            map.put("login", "success");
-            map.put("message", "登陆成功");
+            String token = TokenUtil.sign(username, password);
+            if (token != null) {
+                map.put("code", "200");
+                map.put("message", "认证成功");
+                map.put("token", token);
+            }
             return map;
         } else {
-            map.put("login", "failed");
+            map.put("code", "10");
             map.put("message", "密码错误!");
             return map;
         }

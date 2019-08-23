@@ -23,6 +23,14 @@
     </bean>
     <!--加载注解驱动-->
     <mvc:annotation-driven/>
+    <!--拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/login"/>
+            <bean class="spring.Interceptor.TokenInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
     <!--    <mvc:resources location="/js/" mapping="/js/**"/>-->
     <!--    <bean name="/firstController" class="spring.controller.FirstController"/>-->
     <!-- 处理器映射器，将处理器Handle的name作为url进行查找 -->
