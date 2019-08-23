@@ -15,15 +15,20 @@ import javax.servlet.http.HttpServletResponse;
 public class TokenInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
+        System.out.println("request.getMethod():" + request.getMethod());
         if (request.getMethod().equals("OPTIONS")) {
             response.setStatus(HttpServletResponse.SC_OK);
+            //response.addHeader("Access-Control-Allow-Origin", "*");
+            //response.addHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,PUT,DELETE");
+            //response.setHeader("Access-Control-Allow-Headers", "x-requested-with,Authorization，Content-Type");
             System.out.println("preHandle");
             return true;
         }
         response.setCharacterEncoding("utf-8");
-        String token = request.getHeader("admin-token");
+        String token = request.getHeader("Authorization");
+        System.out.println("token" + token);
         if (token != null) {
-            boolean result = TokenUtil.verify(token);
+            boolean result = TokenUtil.verify(token.replace("\"", ""));
             if (result) {
                 System.out.println("通过拦截器");
                 return true;

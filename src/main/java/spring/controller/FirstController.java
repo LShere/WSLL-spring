@@ -50,13 +50,7 @@ public class FirstController {
         return users;
     }
 
-    //需要参数的GET
-    @GetMapping(value = "/axiosId")
-    @ResponseBody
-    public String axiosId(@RequestParam String id) {
-        System.out.println("axiosId:" + id);
-        return id;
-    }
+
 
     @RequestMapping("/test2")
     @ResponseBody

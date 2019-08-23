@@ -3,6 +3,7 @@ package spring.controller;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,22 +32,29 @@ public class loginController {
         Map<String, Object> map = new HashMap<String, Object>();
         User SqlUser = serviceDao.findUserByName(username);
         if (SqlUser == null) {
-            map.put("code", "10");
+            map.put("code", 400);
             map.put("message", "用户名不存在!");
             return map;
         }
         if (SqlUser.getPassword().equals(password)) {
             String token = TokenUtil.sign(username, password);
             if (token != null) {
-                map.put("code", "200");
+                map.put("code", 200);
                 map.put("message", "认证成功");
                 map.put("token", token);
             }
             return map;
         } else {
-            map.put("code", "10");
+            map.put("code", 400);
             map.put("message", "密码错误!");
             return map;
         }
+    }
+    //需要参数的GET
+    @GetMapping(value = "/axiosId")
+    @ResponseBody
+    public String axiosId(@RequestParam String id) {
+        System.out.println("axiosId:" + id);
+        return id;
     }
 }
