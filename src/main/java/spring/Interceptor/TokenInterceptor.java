@@ -1,5 +1,6 @@
 package spring.Interceptor;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -7,6 +8,8 @@ import spring.token.TokenUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 自定义token拦截器
@@ -35,7 +38,12 @@ public class TokenInterceptor implements HandlerInterceptor {
             }
         }
         System.out.println("认证失败");
-        response.getWriter().write("50000");
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 401);
+        map.put("message", "未登录或token过期!");
+        response.setContentType("application/json; charset=utf-8");
+        response.getWriter().print(JSON.toJSONString(map));
+
         return false;
     }
 
