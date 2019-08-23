@@ -18,15 +18,17 @@ import java.util.Map;
 public class TokenInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        System.out.println("request.getMethod():" + request.getMethod());
-        if (request.getMethod().equals("OPTIONS")) {
-            response.setStatus(HttpServletResponse.SC_OK);
-            //response.addHeader("Access-Control-Allow-Origin", "*");
-            //response.addHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,PUT,DELETE");
-            //response.setHeader("Access-Control-Allow-Headers", "x-requested-with,Authorization，Content-Type");
-            System.out.println("preHandle");
-            return true;
-        }
+        System.out.println("request.getMethod:" + request.getMethod());
+        //if (request.getMethod().equals("OPTIONS")) {
+        //    System.out.println("HttpServletResponse.SC_OK:" + HttpServletResponse.SC_OK);
+        //    response.setStatus(HttpServletResponse.SC_OK);
+        //    response.addHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+        //    response.addHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,PUT,DELETE");
+        //    response.addHeader("Access-Control-Allow-Credentials:","true");
+        //    response.addHeader("Access-Control-Allow-Headers", "x-requested-with,Authorization,Content-Type");
+        //    System.out.println("preHandle");
+        //    return true;
+        //}
         response.setCharacterEncoding("utf-8");
         String token = request.getHeader("Authorization");
         System.out.println("token" + token);

@@ -28,23 +28,27 @@
         <filter-name>encoding</filter-name>
         <url-pattern>*.action</url-pattern>
     </filter-mapping>
-    <!-- 让jetty支持跨域访问 -->
-    <filter>
-        <filter-name>cross-origin</filter-name>
-        <filter-class>org.eclipse.jetty.servlets.CrossOriginFilter</filter-class>
-        <init-param>
-            <param-name>allowedOrigins</param-name>
-            <param-value>*</param-value>
-        </init-param>
-        <init-param>
-            <param-name>allowedMethods</param-name>
-            <param-value>GET,POST,HEAD</param-value>
-        </init-param>
-        <init-param>
-            <param-name>allowedHeaders</param-name>
-            <param-value>X-Requested-With,Content-Type,Accept,Origin</param-value>
-        </init-param>
-    </filter>
+    <!-- 让jetty支持跨域访问,不能很好支持有请求头的OPTIONS，不采用 -->
+    <!--    <filter>-->
+    <!--        <filter-name>cross-origin</filter-name>-->
+    <!--        <filter-class>org.eclipse.jetty.servlets.CrossOriginFilter</filter-class>-->
+    <!--        <init-param>-->
+    <!--            <param-name>allowedOrigins</param-name>-->
+    <!--            <param-value>*</param-value>-->
+    <!--        </init-param>-->
+    <!--        <init-param>-->
+    <!--            <param-name>allowedMethods</param-name>-->
+    <!--            <param-value>GET,POST,HEAD</param-value>-->
+    <!--        </init-param>-->
+    <!--        <init-param>-->
+    <!--            <param-name>allowedHeaders</param-name>-->
+    <!--            <param-value>X-Requested-With,Content-Type,Accept,Origin</param-value>-->
+    <!--        </init-param>-->
+    <!--    </filter>-->
+    <!--    <filter-mapping>-->
+    <!--        <filter-name>cross-origin</filter-name>-->
+    <!--        <url-pattern>/*</url-pattern>-->
+    <!--    </filter-mapping>-->
 
     <!--配置Spirng MVC前端控制器-->
     <servlet>
@@ -62,13 +66,7 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!-- 此处表示jetty中的所有url都可以支持跨域 -->
-    <filter-mapping>
-        <filter-name>cross-origin</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <!--跨域-->
+    <!--真·跨域-->
     <filter>
         <filter-name>CORS</filter-name>
         <filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
@@ -97,6 +95,5 @@
         <filter-name>CORS</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
 
 </web-app>
