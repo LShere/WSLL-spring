@@ -8,7 +8,7 @@ import spring.pojo.Goods;
 import java.util.List;
 
 @Service
-public class GoodsServiceImpl implements GoodsService{
+public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     GoodsDao goodsDao;

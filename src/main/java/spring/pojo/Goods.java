@@ -4,16 +4,16 @@ import java.util.Date;
 
 public class Goods {
 
-    Integer goods_id;
-    String  goods_type;
-    String  goods_name;
-    String  goods_describe;
-    Integer goods_price;
-    Date    goods_validity;
-    String  goods_enable;
-    Integer goods_browse;
-    Integer goods_buy;
-    String  goods_picture_path;
+    private Integer goods_id;
+    private String goods_type;
+    private String goods_name;
+    private String goods_describe;
+    private Integer goods_price;
+    private Date goods_validity;
+    private String goods_enable;
+    private Integer goods_browse;
+    private Integer goods_buy;
+    private String goods_picture_path;
 
     public Integer getGoods_id() {
         return goods_id;

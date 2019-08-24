@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface GoodsDao {
 
-    List<Goods> findAllGoods();
+    public List<Goods> findAllGoods();
 
 }

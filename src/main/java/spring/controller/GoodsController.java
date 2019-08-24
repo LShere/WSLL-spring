@@ -2,13 +2,14 @@ package spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import spring.pojo.Goods;
 import spring.service.GoodsService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class GoodsController {
@@ -16,11 +17,21 @@ public class GoodsController {
     @Autowired
     GoodsService goodsService;
 
-    @RequestMapping("/goods")
+    @GetMapping(value = "/getGoods")
     @ResponseBody
-    public List<Goods> findAllGoods(){
-        List<Goods> goodsList=goodsService.findAllGoods();
-        return goodsList;
-    }
+    public Map<String, Object> findAllGoods() {
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<Goods> goodsList = goodsService.findAllGoods();
+        if (goodsList == null) {
+            map.put("code", 400);
+            map.put("message", "不存在商品!");
+            return map;
+        } else {
+            map.put("code", 200);
+            map.put("message", "查找商品成功!");
+            map.put("goods", goodsList);
+            return map;
+        }
 
+    }
 }
