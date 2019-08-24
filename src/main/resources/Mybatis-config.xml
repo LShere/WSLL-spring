@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 由于在Spring中已经配置了数据源信息以及mapper接口文件扫描器
+所以在MyBatis的配置文件中只需要根据POJO类路径进行别名配置即可-->
+<configuration>
+<!--    <properties resource="db.properties"/>-->
+<!--    <settings>-->
+<!--        <setting name="logImpl" value="STDOUT_LOGGING"/>-->
+<!--    </settings>-->
+    <typeAliases>
+<!--        <typeAlias alias="user" type="spring.pojo.User"/>-->
+    </typeAliases>
+<!--    <environments default="development">-->
+<!--        <environment id="development">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+<!--                <property name="driver" value="${jdbc.driverClassName}"/>-->
+<!--                <property name="url" value="${jdbc.url}"/>-->
+<!--                <property name="username" value="${jdbc.username}"/>-->
+<!--                <property name="password" value="${jdbc.password}"/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
+<!--    </environments>-->
+<!--    <mappers>-->
+<!--        <mapper resource="mapper/CustomerMapper.xml"/>-->
+<!--        <mapper resource="mapper/goodMapper.xml"/>-->
+<!--        <mapper resource="mapper/EmployeeMapper.xml"/>-->
+<!--        <mapper resource="mapper/officeMapper.xml"/>-->
+<!--        <mapper resource="mapper/GoodTypeMapper.xml"/>-->
+<!--        &lt;!&ndash;        <mapper resource="mapper/UserDaoMapper.xml"/>&ndash;&gt;-->
+<!--    </mappers>-->
+</configuration>
