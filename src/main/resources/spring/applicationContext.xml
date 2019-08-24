@@ -69,7 +69,9 @@
         <property name="basePackage" value="spring.dao"/>
     </bean>
     <!--注解扫描-->
-    <context:component-scan base-package="spring.*"/>
+    <context:component-scan base-package="spring.dao"/>
+    <context:component-scan base-package="spring.service"/>
+
 
 
 </beans>

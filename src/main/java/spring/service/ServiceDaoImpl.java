@@ -8,22 +8,22 @@ import spring.pojo.User;
 
 import java.util.List;
 
-@Service
-@Transactional
+//@Service
+//@Transactional
 public class ServiceDaoImpl implements ServiceDao {
-    @Autowired
-    private UserDao userDao;
-
-    public List<User> findUser() {
-        return userDao.findUser();
-    }
-
-    public List<User> findUserById(long id) {
-        return userDao.findUserById(id);
-    }
-
-    public User findUserByName(String name) {
-        return userDao.findUserByName(name);
-    }
+//    @Autowired
+//    private UserDao userDao;
+//
+//    public List<User> findUser() {
+//        return userDao.findUser();
+//    }
+//
+//    public List<User> findUserById(long id) {
+//        return userDao.findUserById(id);
+//    }
+//
+//    public User findUserByName(String name) {
+//        return userDao.findUserByName(name);
+//    }
 
 }
