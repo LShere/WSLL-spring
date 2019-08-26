@@ -1,31 +1,31 @@
 package spring.pojo;
 
 public class User {
-    private long id;
-    private String username;
-    private String password;
+    private String openid;
+    private String nickname;
 
-    public long getId() {
-        return id;
+    public User() {
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public User(String openid, String nickname) {
+        this.openid = openid;
+        this.nickname = nickname;
     }
 
-    public String getUsername() {
-        return username;
+    public String getOpenid() {
+        return openid;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 
-    public String getPassword() {
-        return password;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
+
 }

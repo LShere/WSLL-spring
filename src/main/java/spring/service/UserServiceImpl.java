@@ -6,24 +6,22 @@ import org.springframework.transaction.annotation.Transactional;
 import spring.dao.UserDao;
 import spring.pojo.User;
 
-import java.util.List;
-
 @Service
 @Transactional
-public class ServiceDaoImpl implements ServiceDao {
+public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserDao userDao;
 
-    public List<User> findUser() {
-        return userDao.findUser();
+    public Integer addUser(User user) {
+        return userDao.addUser(user);
     }
 
-    public List<User> findUserById(long id) {
-        return userDao.findUserById(id);
+    public User findUserById(String openid) {
+        return userDao.findUserById(openid);
     }
 
-    public User findUserByName(String name) {
-        return userDao.findUserByName(name);
+    public User findUserByName(String nickname) {
+        return userDao.findUserByName(nickname);
     }
-
 }
