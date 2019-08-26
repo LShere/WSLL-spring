@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.dao.CartDao">
+
+
+    <select id="countCart" resultType="Integer" parameterType="String">
+        select count(*) from cart where openid=#{openid}
+    </select>
+
+    <delete id="deleteCart" parameterType="String">
+        delete from cart where openid=#{openid} and goods_id=#{goods_id}
+    </delete>
+
+
+
+
+</mapper>
