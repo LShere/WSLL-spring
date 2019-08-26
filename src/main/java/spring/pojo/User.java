@@ -3,8 +3,11 @@ package spring.pojo;
 public class User {
     private String openid;
     private String nickname;
-    public User(){}
-    public User(String openid, String nickname){
+
+    public User() {
+    }
+
+    public User(String openid, String nickname) {
         this.openid = openid;
         this.nickname = nickname;
     }

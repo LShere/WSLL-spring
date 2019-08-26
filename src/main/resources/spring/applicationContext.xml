@@ -62,7 +62,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:Mybatis-config.xml"/>
-         <property name="mapperLocations" value="classpath:mapper/UserDao.xml"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
     </bean>
     <!--Mapper代理开发（基于MapperScannerConfigurer）-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -71,6 +71,7 @@
     <!--注解扫描-->
     <context:component-scan base-package="spring.dao"/>
     <context:component-scan base-package="spring.service"/>
+    <context:component-scan base-package="spring.controller"/>
 
 
 

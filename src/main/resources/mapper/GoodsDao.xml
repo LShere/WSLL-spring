@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.dao.GoodsDao">
+    <resultMap id="goods" type="spring.pojo.Goods">
+    </resultMap>
+
+    <select id="findAllGoods" resultMap="goods">
+		select goods_id,
+        goods_type,
+        goods_name,
+        goods_describe,
+        goods_price,
+        goods_enable,
+        goods_browse,
+        goods_buy,
+        goods_picture_path
+		from goods
+	</select>
+
+
+</mapper>
