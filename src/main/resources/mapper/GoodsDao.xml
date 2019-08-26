@@ -18,5 +18,49 @@
 		from goods
 	</select>
 
+    <select id="findGoodsPage" resultMap="goods" parameterType="Map">
+        select goods_id,
+        goods_type,
+        goods_name,
+        goods_describe,
+        goods_price,
+        goods_enable,
+        goods_browse,
+        goods_buy,
+        goods_picture_path
+		from goods
+		<where>
+            <if test="goods_id!=null and goods_id!=''">
+                goods_id=#{goods_id}
+            </if>
+            <if test="goods_type!=null and goods_type!=''">
+                and goods_type=#{goods_type}
+            </if>
+            <if test="goods_name!=null and goods_name!=''">
+                and goods_name=#{goods_name}
+            </if>
+            <if test="goods_describe!=null and goods_describe!=''">
+                and goods_describe=#{goods_describe}
+            </if>
+        </where>
+    </select>
+
+    <select id="countGoods" resultType="int">
+        select count(*) from goods
+    </select>
+
+    <select id="findGoodsById" resultMap="goods" parameterType="int">
+        select goods_id,
+        goods_type,
+        goods_name,
+        goods_describe,
+        goods_price,
+        goods_enable,
+        goods_browse,
+        goods_buy,
+        goods_picture_path
+		from goods
+		where goods_id=#{id}
+    </select>
 
 </mapper>
