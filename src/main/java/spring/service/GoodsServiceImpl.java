@@ -20,7 +20,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     /*实现分页查询*/
-    public Page<Goods> findGoodPage(int currentPage, int goods_id, String goods_type, String goods_name, String goods_describe) {
+    public Page<Goods> findGoodPage(int currentPage, String goods_type, String goods_name, String goods_describe) {
         HashMap<String,Object> map=new HashMap<String, Object>();
         Page<Goods> page=new Page<Goods>();
 
@@ -35,9 +35,6 @@ public class GoodsServiceImpl implements GoodsService {
         map.put("currentPage",(currentPage-1)*pageSize);
         map.put("pageSize",pageSize);
 
-        if (goods_id >= 0) {
-            map.put("goods_id",goods_id);
-        }
         if (goods_type != null) {
             map.put("goods_type",goods_type);
         }

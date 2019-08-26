@@ -1,5 +1,6 @@
 package spring.controller;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,11 +37,11 @@ public class GoodsController {
 
     }
 
-    @GetMapping(value = "/selectGoodsPage")
+    @GetMapping(value = "/findGoodsPage")
     @ResponseBody
-    public Map<String, Object> findGoodPage(int currentPage, int goods_id, String goods_type, String goods_name, String goods_describe){
+    public Map<String, Object> findGoodPage(int currentPage, String goods_type, String goods_name, String goods_describe) {
         Map<String, Object> map = new HashMap<String, Object>();
-        Page<Goods> goodsPage=goodsService.findGoodPage(currentPage,goods_id,goods_type,goods_name,goods_describe);
+        Page<Goods> goodsPage = goodsService.findGoodPage(currentPage, goods_type, goods_name, goods_describe);
         if (goodsPage == null) {
             map.put("code", 400);
             map.put("message", "不存在商品!");
@@ -55,9 +56,9 @@ public class GoodsController {
 
     @GetMapping(value = "/findGoodsbyId")
     @ResponseBody
-    public Map<String, Object> findGoodsbyId(int id){
+    public Map<String, Object> findGoodsbyId(@Param("id")int id) {
         Map<String, Object> map = new HashMap<String, Object>();
-        Goods goods=goodsService.findGoodsById(id);
+        Goods goods = goodsService.findGoodsById(id);
         if (goods == null) {
             map.put("code", 400);
             map.put("message", "不存在商品!");

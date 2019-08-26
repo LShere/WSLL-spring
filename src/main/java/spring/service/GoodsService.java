@@ -9,7 +9,7 @@ public interface GoodsService {
 
     List<Goods> findAllGoods();
 
-    Page<Goods> findGoodPage(int currentPage, int goods_id, String goods_type, String goods_name, String goods_describe);
+    Page<Goods> findGoodPage(int currentPage, String goods_type, String goods_name, String goods_describe);
 
     Goods findGoodsById(int id);
 

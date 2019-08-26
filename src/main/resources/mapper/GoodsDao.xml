@@ -19,17 +19,20 @@
 	</select>
 
     <select id="findGoodsPage" resultMap="goods" parameterType="Map">
-        select goods_id,
-        goods_type,
-        goods_name,
-        goods_describe,
-        goods_price,
-        goods_enable,
-        goods_browse,
-        goods_buy,
-        goods_picture_path
-		from goods
-		<where>
+        select g.goods_id,
+        t.type_name as goods_type,
+        g.goods_name,
+        g.goods_describe,
+        g.goods_price,
+        g.goods_enable,
+        g.goods_browse,
+        g.goods_buy,
+        g.goods_picture_path
+        from goods g
+        left join (select type_id,type_name from g_type
+        ) t
+        on g.goods_type=t.type_id
+ 		<where>
             <if test="goods_id!=null and goods_id!=''">
                 goods_id=#{goods_id}
             </if>
@@ -37,7 +40,7 @@
                 and goods_type=#{goods_type}
             </if>
             <if test="goods_name!=null and goods_name!=''">
-                and goods_name=#{goods_name}
+                and goods_name like "%"#{goods_name}"%"
             </if>
             <if test="goods_describe!=null and goods_describe!=''">
                 and goods_describe=#{goods_describe}

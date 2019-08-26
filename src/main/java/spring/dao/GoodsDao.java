@@ -14,6 +14,7 @@ public interface GoodsDao {
 
     Integer countGoods();
 
-
     Goods findGoodsById(int id);
+
+
 }
