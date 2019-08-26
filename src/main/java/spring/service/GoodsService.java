@@ -13,4 +13,6 @@ public interface GoodsService {
 
     Goods findGoodsById(int id);
 
+    List<Goods> findGoodsByRand();
+
 }

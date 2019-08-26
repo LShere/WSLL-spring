@@ -71,4 +71,23 @@ public class GoodsController {
         }
     }
 
+    /*随机获取商品表5条记录*/
+    @GetMapping(value = "/getGoodsByRand")
+    @ResponseBody
+    public Map<String, Object> findGoodsByRand() {
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<Goods> goodsList = goodsService.findGoodsByRand();
+        if (goodsList == null) {
+            map.put("code", 400);
+            map.put("message", "不存在商品!");
+            return map;
+        } else {
+            map.put("code", 200);
+            map.put("message", "查找商品成功!");
+            map.put("goods", goodsList);
+            return map;
+        }
+
+    }
+
 }
