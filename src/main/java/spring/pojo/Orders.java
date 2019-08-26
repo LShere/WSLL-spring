@@ -5,7 +5,7 @@ public class Orders {
     String openid;
     String pay_status;//代付款 代发货
     Date create_time;
-    int pay_price;
+    float pay_price;
 
     public int getOrder_id() {
         return order_id;
@@ -39,11 +39,11 @@ public class Orders {
         this.create_time = create_time;
     }
 
-    public int getPay_price() {
+    public float getPay_price() {
         return pay_price;
     }
 
-    public void setPay_price(int pay_price) {
+    public void setPay_price(float pay_price) {
         this.pay_price = pay_price;
     }
 }

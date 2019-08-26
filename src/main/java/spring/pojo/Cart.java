@@ -4,10 +4,12 @@ import java.util.Date;
 
 public class Cart {
     int cart_id;
-    String cart_openid;
-    int cart_goods_id;
-    int cart_num;
-    Date cart_create_time;
+    String openid;
+    int goods_id;
+    int total_num;
+    String file_path;
+    float goods_price;
+    String goods_name;
 
     public int getCart_id() {
         return cart_id;
@@ -17,35 +19,51 @@ public class Cart {
         this.cart_id = cart_id;
     }
 
-    public String getCart_openid() {
-        return cart_openid;
+    public String getOpenid() {
+        return openid;
     }
 
-    public void setCart_openid(String cart_openid) {
-        this.cart_openid = cart_openid;
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 
-    public int getCart_goods_id() {
-        return cart_goods_id;
+    public int getGoods_id() {
+        return goods_id;
     }
 
-    public void setCart_goods_id(int cart_goods_id) {
-        this.cart_goods_id = cart_goods_id;
+    public void setGoods_id(int goods_id) {
+        this.goods_id = goods_id;
     }
 
-    public int getCart_num() {
-        return cart_num;
+    public int getTotal_num() {
+        return total_num;
     }
 
-    public void setCart_num(int cart_num) {
-        this.cart_num = cart_num;
+    public void setTotal_num(int total_num) {
+        this.total_num = total_num;
     }
 
-    public Date getCart_create_time() {
-        return cart_create_time;
+    public String getFile_path() {
+        return file_path;
     }
 
-    public void setCart_create_time(Date cart_create_time) {
-        this.cart_create_time = cart_create_time;
+    public void setFile_path(String file_path) {
+        this.file_path = file_path;
+    }
+
+    public float getGoods_price() {
+        return goods_price;
+    }
+
+    public void setGoods_price(float goods_price) {
+        this.goods_price = goods_price;
+    }
+
+    public String getGoods_name() {
+        return goods_name;
+    }
+
+    public void setGoods_name(String goods_name) {
+        this.goods_name = goods_name;
     }
 }
