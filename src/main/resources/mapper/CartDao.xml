@@ -14,7 +14,7 @@
 
     <insert id="addCart" parameterType="Map">
         insert into cart(openid,goods_id,total_num,file_path,goods_price,goods_name)
-        values(#{openid},#{goods_id},#{total_num},#{file_path},#{goods_price},#{goods_name})
+        values(#{openid},#{goods_id},#{num},#{file_path},#{goods_price},#{goods_name})
 
 
     </insert>
