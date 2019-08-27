@@ -44,14 +44,39 @@ public class GoodsController {
     }
 
     /*
-    *商品表的分页查询
-    * 传入数据：
-    * currentPage-当前页数
-    * goods_type-商品列表
-    * goods_name-商品名字
-    * goods_describe-商品描述
-    * 返回数据json
-    * */
+     *商品表的查询
+     * 传入数据：
+     * goods_type-商品类目名
+     * goods_name-商品名字
+     * goods_describe-商品描述
+     * 返回数据json
+     * */
+    @GetMapping(value = "/findGoods")
+    @ResponseBody
+    public Map<String, Object> findGoods(String goods_type, String goods_name, String goods_describe) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<Goods> goodsList = goodsService.findGoods(goods_type, goods_name, goods_describe);
+        if (goodsList == null) {
+            map.put("code", 400);
+            map.put("message", "不存在商品!");
+            return map;
+        } else {
+            map.put("code", 200);
+            map.put("message", "查找商品成功!");
+            map.put("goods", goodsList);
+            return map;
+        }
+    }
+
+    /*
+     *商品表的分页查询
+     * 传入数据：
+     * currentPage-当前页数
+     * goods_type-商品列表
+     * goods_name-商品名字
+     * goods_describe-商品描述
+     * 返回数据json
+     * */
     @GetMapping(value = "/findGoodsPage")
     @ResponseBody
     public Map<String, Object> findGoodPage(int currentPage, String goods_type, String goods_name, String goods_describe) {
@@ -106,7 +131,6 @@ public class GoodsController {
 
     }
 
-
     //获取商品分类
     @GetMapping(value = "/getGoodsType")
     @ResponseBody
@@ -136,10 +160,10 @@ public class GoodsController {
     }
 
     /*查询添加时间最晚的n条记录
-    * 传入数据 n*/
+     * 传入数据 n*/
     @GetMapping(value = "/findNewGoods")
     @ResponseBody
-    public Map<String, Object> findNewGoods(int n){
+    public Map<String, Object> findNewGoods(int n) {
         Map<String, Object> map = new HashMap<String, Object>();
         List<Goods> goodsList = goodsService.findNewGoods(n);
         if (goodsList == null) {
@@ -154,5 +178,12 @@ public class GoodsController {
         }
     }
 
+    /*插入商品表*/
+    @GetMapping(value = "/addGoods")
+    @ResponseBody
+    public int addGoods(Goods goods) {
+        int rows = this.goodsService.addGoods(goods);
+        return rows;
+    }
 
 }

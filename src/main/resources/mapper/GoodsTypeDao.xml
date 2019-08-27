@@ -6,6 +6,18 @@
     <resultMap id="goodsType" type="spring.pojo.GoodsType">
     </resultMap>
 
+    <select id="findGoodsTypeById" resultMap="goodsType">
+        select type_id,
+        type_name,
+        type_describe,
+        type_enable,
+        type_sup,
+        type_level,
+        type_file_path
+        from g_type
+        where type_id=#{id}
+    </select>
+
     <select id="findAllGoodtype" resultMap="goodsType">
         select type_id,
         type_name,
