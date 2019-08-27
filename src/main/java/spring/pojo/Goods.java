@@ -8,7 +8,7 @@ public class Goods {
     private String goods_type;
     private String goods_name;
     private String goods_describe;
-    private Integer goods_price;
+    private Float goods_price;
     private Date goods_validity;
     private String goods_enable;
     private Integer goods_browse;
@@ -47,11 +47,11 @@ public class Goods {
         this.goods_describe = goods_describe;
     }
 
-    public Integer getGoods_price() {
+    public Float getGoods_price() {
         return goods_price;
     }
 
-    public void setGoods_price(Integer goods_price) {
+    public void setGoods_price(Float goods_price) {
         this.goods_price = goods_price;
     }
 
