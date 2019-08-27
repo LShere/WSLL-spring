@@ -54,4 +54,8 @@ public class GoodsServiceImpl implements GoodsService {
     public Goods findGoodsById(int id) {
         return this.goodsDao.findGoodsById(id);
     }
+
+    public List<Goods> findGoodsByRand() {
+        return this.goodsDao.findGoodsByRand();
+    }
 }
