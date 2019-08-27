@@ -51,4 +51,8 @@ public class CartServiceImpl implements CartService {
     public List<Cart> listCart(String openid) {
         return cartDao.listCart(openid);
     }
+
+    public Integer clearCart(String openid) {
+        return cartDao.clearCart(openid);
+    }
 }

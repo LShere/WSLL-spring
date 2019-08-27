@@ -11,4 +11,8 @@ public interface OrdersDao {
 
     public int deleteOrder(int order_id);
 
+    public Integer addOrderBuyNow(Orders orders); //直接为订单表添加一条记录
+
+    public Integer addOrderFromCart(Orders orders); //添加订单同时清空购物车
+
 }

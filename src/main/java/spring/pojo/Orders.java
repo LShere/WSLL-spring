@@ -1,17 +1,17 @@
 package spring.pojo;
 import java.util.Date;
 public class Orders {
-    int order_id;
+    String order_id;
     String openid;
     String pay_status;//代付款 代发货
     Date create_time;
     float pay_price;
 
-    public int getOrder_id() {
+    public String getOrder_id() {
         return order_id;
     }
 
-    public void setOrder_id(int order_id) {
+    public void setOrder_id(String order_id) {
         this.order_id = order_id;
     }
 
