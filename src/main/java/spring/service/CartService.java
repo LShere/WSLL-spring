@@ -5,11 +5,12 @@ import spring.pojo.Cart;
 import java.util.List;
 
 public interface CartService {
-    public int countCart(String openid);
+    public Integer countCart(String openid);
 
-    int deleteCart(String openid, int goods_id);
+    Integer deleteCart(String openid, Integer goods_id);
 
-    int addCart(String openid, int goods_id, int num);
+    Integer addCart(String openid, Integer goods_id, Integer num);
     public List<Cart> listCart(String openid);
 
+    Integer plusMinusCart(String openid, Integer goods_id, Integer sign);
 }

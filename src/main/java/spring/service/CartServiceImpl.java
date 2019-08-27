@@ -20,11 +20,11 @@ public class CartServiceImpl implements CartService {
     @Autowired
     GoodsDao goodsDao;
 
-    public int countCart(String openid) {
+    public Integer countCart(String openid) {
         return cartDao.countCart(openid);
     }
 
-    public int deleteCart(String openid, int goods_id) {
+    public Integer deleteCart(String openid, Integer goods_id) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("openid", openid);
         map.put("goods_id", goods_id);
@@ -32,23 +32,47 @@ public class CartServiceImpl implements CartService {
         return cartDao.deleteCart(map);
     }
 
-    public int addCart(String openid, int goods_id, int num) {
+    public Integer addCart(String openid, Integer goods_id, Integer num) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("openid", openid);
         map.put("goods_id", goods_id);
         map.put("num", num);
 
-        Goods goods = new Goods();
-        goods = goodsDao.findGoodsById(goods_id);
+        if(cartDao.findCart(map)!=null){
+        for(int i=0;i<num;i++){
+            map.put("sign",1);
+            cartDao.plusMinusCart(map);
+        }
+        return 1;
+        }else {
+            Goods goods = new Goods();
+            goods = goodsDao.findGoodsById(goods_id);
 
-        map.put("file_path", goods.getGoods_picture_path());
-        map.put("goods_price", goods.getGoods_price());
-        map.put("goods_name", goods.getGoods_name());
+            map.put("file_path", goods.getGoods_picture_path());
+            map.put("goods_price", goods.getGoods_price());
+            map.put("goods_name", goods.getGoods_name());
 
-        return cartDao.addCart(map);
+            return cartDao.addCart(map);
+        }
     }
 
     public List<Cart> listCart(String openid) {
         return cartDao.listCart(openid);
+    }
+
+    public Integer plusMinusCart(String openid, Integer goods_id, Integer sign) {
+
+
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("openid", openid);
+        map.put("goods_id", goods_id);
+        map.put("sign", sign);
+        Cart cart = cartDao.findCart(map);
+        if(cart.getTotal_num()==1 && sign==0){
+            return cartDao.deleteCart(map);
+        }else {
+            return cartDao.plusMinusCart(map);
+        }
     }
 }

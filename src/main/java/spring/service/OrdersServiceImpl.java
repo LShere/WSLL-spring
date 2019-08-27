@@ -11,10 +11,10 @@ import java.util.List;
 public class OrdersServiceImpl implements OrdersService {
 @Autowired
 OrdersDao ordersDao;
-    public List<Orders> findOrdersByOpenid(String openid,int order_id){
+    public List<Orders> findOrdersByOpenid(String openid,String order_id){
         return ordersDao.findOrdersByOpenid(openid,order_id);
     }
-    public int deleteOrder(int order_id){
+    public int deleteOrder(String order_id){
         return ordersDao.deleteOrder(order_id);
     }
 

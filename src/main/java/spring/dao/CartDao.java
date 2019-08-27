@@ -14,4 +14,7 @@ public interface CartDao {
     public int deleteCart(Map map);
     public int addCart(Map map);
 
+    public Cart findCart(Map map);
+
+    Integer plusMinusCart(Map<String, Object> map);
 }

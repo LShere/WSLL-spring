@@ -20,6 +20,20 @@
     <select id="listCart" resultType="Cart" parameterType="String">
         select * from cart where openid=#{openid}
     </select>
+    <update id="plusMinusCart" parameterType="Map">
+        update cart set total_num=
+        <if test="sign == 0">
+            total_num-1
+        </if>
+        <if test="sign == 1">
+            total_num+1
+        </if>
+        where openid=#{openid}and goods_id=#{goods_id}
+    </update>
+
+    <select id="findCart" resultType="Cart" parameterType="Map">
+        select * from cart where openid=#{openid} and goods_id=#{goods_id}
+    </select>
 
 
 
