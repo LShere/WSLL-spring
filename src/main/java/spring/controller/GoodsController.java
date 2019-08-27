@@ -19,6 +19,7 @@ public class GoodsController {
     @Autowired
     GoodsService goodsService;
 
+    /*查询商品表的所有数据*/
     @GetMapping(value = "/getGoods")
     @ResponseBody
     public Map<String, Object> findAllGoods() {
@@ -37,6 +38,15 @@ public class GoodsController {
 
     }
 
+    /*
+    *商品表的分页查询
+    * 传入数据：
+    * currentPage-当前页数
+    * goods_type-商品列表
+    * goods_name-商品名字
+    * goods_describe-商品描述
+    * 返回数据json
+    * */
     @GetMapping(value = "/findGoodsPage")
     @ResponseBody
     public Map<String, Object> findGoodPage(int currentPage, String goods_type, String goods_name, String goods_describe) {
@@ -54,6 +64,7 @@ public class GoodsController {
         }
     }
 
+    /*根据传入的商品ID查询商品表*/
     @GetMapping(value = "/findGoodsbyId")
     @ResponseBody
     public Map<String, Object> findGoodsbyId(@Param("id")int id) {
@@ -71,12 +82,12 @@ public class GoodsController {
         }
     }
 
-    /*随机获取商品表5条记录*/
-    @GetMapping(value = "/getGoodsByRand")
+    /*随机获取商品表num条记录*/
+    @GetMapping(value = "/findGoodsByRand")
     @ResponseBody
-    public Map<String, Object> findGoodsByRand() {
+    public Map<String, Object> findGoodsByRand(int num) {
         Map<String, Object> map = new HashMap<String, Object>();
-        List<Goods> goodsList = goodsService.findGoodsByRand();
+        List<Goods> goodsList = goodsService.findGoodsByRand(num);
         if (goodsList == null) {
             map.put("code", 400);
             map.put("message", "不存在商品!");
@@ -88,6 +99,25 @@ public class GoodsController {
             return map;
         }
 
+    }
+
+    /*查询添加时间最晚的n条记录
+    * 传入数据 n*/
+    @GetMapping(value = "/findNewGoods")
+    @ResponseBody
+    public Map<String, Object> findNewGoods(int n){
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<Goods> goodsList = goodsService.findNewGoods(n);
+        if (goodsList == null) {
+            map.put("code", 400);
+            map.put("message", "不存在商品!");
+            return map;
+        } else {
+            map.put("code", 200);
+            map.put("message", "查找商品成功!");
+            map.put("goods", goodsList);
+            return map;
+        }
     }
 
 }
