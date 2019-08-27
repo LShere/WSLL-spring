@@ -12,6 +12,8 @@ public interface CartDao {
     public List<Cart> listCart(String openid);
 
     public int deleteCart(Map map);
+
     public int addCart(Map map);
 
+    public Integer clearCart(String openid); //清空购物车
 }

@@ -31,7 +31,7 @@ public class ValidateLoginController {
             appid = object.getString("appid");
             appSecret = object.getString("appSecret");
             code = object.getString("code");
-            grant_type = "grant_type";
+            grant_type = "authorization_code";
 
             nickname = object.getString("nickname");
             //先判断数据库中是否存在所请求的openid
