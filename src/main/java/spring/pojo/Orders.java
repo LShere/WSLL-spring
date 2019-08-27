@@ -1,11 +1,22 @@
 package spring.pojo;
 import java.util.Date;
+import java.util.List;
+
 public class Orders {
     String order_id;
     String openid;
     String pay_status;//代付款 代发货
     Date create_time;
     float pay_price;
+    List<GoodsOrders> goodsOrdersList;
+
+    public List<GoodsOrders> getGoodsOrdersList() {
+        return goodsOrdersList;
+    }
+
+    public void setGoodsOrdersList(List<GoodsOrders> goodsOrdersList) {
+        this.goodsOrdersList = goodsOrdersList;
+    }
 
     public String getOrder_id() {
         return order_id;
