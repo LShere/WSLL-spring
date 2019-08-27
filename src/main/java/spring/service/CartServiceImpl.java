@@ -6,9 +6,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 import spring.dao.CartDao;
 import spring.dao.GoodsDao;
+import spring.pojo.Cart;
 import spring.pojo.Goods;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -44,5 +46,9 @@ public class CartServiceImpl implements CartService {
         map.put("goods_name", goods.getGoods_name());
 
         return cartDao.addCart(map);
+    }
+
+    public List<Cart> listCart(String openid) {
+        return cartDao.listCart(openid);
     }
 }

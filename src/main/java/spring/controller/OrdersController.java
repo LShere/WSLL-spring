@@ -18,6 +18,7 @@ public class OrdersController {
     @Autowired
     OrdersService ordersService;
 
+    //根据用户id和订单id查找订单
     @RequestMapping(value = "/findOrdersByOpenid")
     @ResponseBody
     public List<Orders> findOrdersByOpenid(String openid, @RequestParam(defaultValue = "0") int order_id) {
@@ -25,6 +26,7 @@ public class OrdersController {
         return ordersService.findOrdersByOpenid(openid, order_id);
 
     }
+    //删除订单
     @RequestMapping(value = "/deleteOrder")
     @ResponseBody
     public String deleteOrder(int order_id){

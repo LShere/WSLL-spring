@@ -12,8 +12,32 @@
         type_describe,
         type_enable,
         type_sup,
-        type_level
+        type_level,
+        type_file_path
         from g_type
+    </select>
+
+    <select id="findParaType" resultMap="goodsType" >
+        select type_id,
+        type_name,
+        type_sup,
+        type_file_path
+        from g_type
+        where type_sup=0
+    </select>
+
+    <select id="findParaTypeChildType" resultMap="goodsType" parameterType="int">
+        select type_id,
+        type_name,
+        type_sup,
+        type_file_path
+        from g_type
+        where type_sup = #{type_sup}
+<!--        <where>-->
+<!--            <if test="type_sup !=null and type_sup != ''">-->
+<!--                and type_sup = #{type_sup}-->
+<!--            </if>-->
+<!--        </where>-->
     </select>
 
 </mapper>
