@@ -6,9 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import spring.pojo.Goods;
+import spring.pojo.GoodsType;
 import spring.pojo.Page;
 import spring.service.GoodsService;
+import spring.service.GoodsTypeService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +21,8 @@ public class GoodsController {
 
     @Autowired
     GoodsService goodsService;
+    @Autowired
+    GoodsTypeService goodsTypeService;
 
     @GetMapping(value = "/getGoods")
     @ResponseBody
@@ -56,7 +61,7 @@ public class GoodsController {
 
     @GetMapping(value = "/findGoodsbyId")
     @ResponseBody
-    public Map<String, Object> findGoodsbyId(@Param("id")int id) {
+    public Map<String, Object> findGoodsbyId(@Param("id") int id) {
         Map<String, Object> map = new HashMap<String, Object>();
         Goods goods = goodsService.findGoodsById(id);
         if (goods == null) {
@@ -90,4 +95,31 @@ public class GoodsController {
 
     }
 
+    //获取商品分类
+    @GetMapping(value = "/getGoodsType")
+    @ResponseBody
+    public Map<String, Object> getGoodsType() {
+        //一级、二级分类
+        List<GoodsType> typeListP = new ArrayList<GoodsType>();
+        List<GoodsType> typeListC = new ArrayList<GoodsType>();
+        Map<String, Object> map = new HashMap<String, Object>();
+        //获取一级分类
+        typeListP = goodsTypeService.findParaType();
+        for (int i = 0; i < typeListP.size(); i++) {
+            GoodsType goodsType = typeListP.get(i);
+            goodsType.setSubGoodsTypes(goodsTypeService.findParaTypeChildType(Integer.parseInt(goodsType.getType_id())));
+            typeListP.set(i, goodsType);
+        }
+        if (typeListP == null) {
+            map.put("code", 400);
+            map.put("message", "不存在!");
+            return map;
+        } else {
+            map.put("code", 200);
+            map.put("message", "成功!");
+            map.put("typeListP", typeListP);
+            return map;
+        }
+
+    }
 }
