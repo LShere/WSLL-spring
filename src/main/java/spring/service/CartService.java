@@ -12,4 +12,6 @@ public interface CartService {
     int addCart(String openid, int goods_id, int num);
     public List<Cart> listCart(String openid);
 
+    public Integer clearCart(String openid);
+
 }

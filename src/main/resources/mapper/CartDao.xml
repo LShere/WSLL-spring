@@ -21,6 +21,10 @@
         select * from cart where openid=#{openid}
     </select>
 
+    <delete id="clearCart" parameterType="String">
+        delete from cart where openid = #{openid}
+    </delete>
+
 
 
 
