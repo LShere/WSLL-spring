@@ -14,7 +14,8 @@
         goods_enable,
         goods_browse,
         goods_buy,
-        goods_picture_path
+        goods_picture_path,
+        goods_create_time
 		from goods
 	</select>
 
@@ -27,7 +28,8 @@
         g.goods_enable,
         g.goods_browse,
         g.goods_buy,
-        g.goods_picture_path
+        g.goods_picture_path,
+        g.goods_create_time,
         from goods g
         left join (select type_id,type_name from g_type
         ) t
@@ -61,15 +63,41 @@
         goods_enable,
         goods_browse,
         goods_buy,
-        goods_picture_path
+        goods_picture_path,
+        goods_create_time
 		from goods
 		where goods_id=#{id}
     </select>
 
     <select id="findGoodsByRand" parameterType="int" resultMap="goods">
-        SELECT * FROM `goods`
+        SELECT goods_id,
+        goods_type,
+        goods_name,
+        goods_describe,
+        goods_price,
+        goods_enable,
+        goods_browse,
+        goods_buy,
+        goods_picture_path,
+        goods_create_time
+        FROM `goods`
         WHERE goods_id >= (SELECT floor(RAND() * (SELECT MAX(goods_id) FROM `goods`)))
-        ORDER BY goods_id LIMIT #{num};
+        ORDER BY goods_id LIMIT #{num}
+    </select>
+
+    <select id="findNewGoods" parameterType="int" resultMap="goods">
+        SELECT goods_id,
+        goods_type,
+        goods_name,
+        goods_describe,
+        goods_price,
+        goods_enable,
+        goods_browse,
+        goods_buy,
+        goods_picture_path,
+        goods_create_time
+        FROM goods
+		order by goods_create_time desc limit #{n}
     </select>
 
 </mapper>

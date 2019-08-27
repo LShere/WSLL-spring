@@ -15,4 +15,6 @@ public interface GoodsService {
 
     List<Goods> findGoodsByRand(int num);
 
+    List<Goods> findNewGoods(int n);
+
 }
