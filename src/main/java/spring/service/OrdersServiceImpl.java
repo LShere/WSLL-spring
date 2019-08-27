@@ -18,5 +18,9 @@ OrdersDao ordersDao;
         return ordersDao.deleteOrder(order_id);
     }
 
+    public Integer addOrderBuyNow(Orders orders) {
+        return ordersDao.addOrderBuyNow(orders);
+    }
+
 
 }

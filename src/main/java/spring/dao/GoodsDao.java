@@ -10,7 +10,9 @@ public interface GoodsDao {
 
     public List<Goods> findAllGoods();
 
-    List<Goods> findGoodsPage(HashMap<String,Object> map);
+    List<Goods> findGoodsPage(HashMap<String, Object> map);
+
+    List<Goods> findGoods(HashMap<String, Object> map);
 
     Integer countGoods();
 
@@ -19,4 +21,6 @@ public interface GoodsDao {
     List<Goods> findGoodsByRand(int num);
 
     List<Goods> findNewGoods(int n);
+
+    int addGoods(Goods goods);
 }

@@ -35,6 +35,10 @@
         select * from cart where openid=#{openid} and goods_id=#{goods_id}
     </select>
 
+    <delete id="clearCart" parameterType="String">
+        delete from cart where openid = #{openid}
+    </delete>
+
 
 
 

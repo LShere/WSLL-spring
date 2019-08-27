@@ -62,8 +62,6 @@ public class CartServiceImpl implements CartService {
 
     public Integer plusMinusCart(String openid, Integer goods_id, Integer sign) {
 
-
-
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("openid", openid);
         map.put("goods_id", goods_id);
@@ -74,5 +72,8 @@ public class CartServiceImpl implements CartService {
         }else {
             return cartDao.plusMinusCart(map);
         }
+      
+    public Integer clearCart(String openid) {
+        return cartDao.clearCart(openid);
     }
 }

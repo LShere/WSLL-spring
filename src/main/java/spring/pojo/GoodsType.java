@@ -1,12 +1,41 @@
 package spring.pojo;
 
+import java.util.List;
+
 public class GoodsType {
-    String  type_id;
-    String  type_name;
-    String  type_describe;
-    String  type_enable;
-    String  type_sup;
-    String  type_level;
+    String type_id;
+    String type_name;
+    String type_describe;
+    String type_enable;
+    int type_sup;
+    String type_level;
+    String type_file_path;
+    //存放子节点
+    List<GoodsType> subGoodsTypes;
+
+    public int getType_sup() {
+        return type_sup;
+    }
+
+    public void setType_sup(int type_sup) {
+        this.type_sup = type_sup;
+    }
+
+    public List<GoodsType> getSubGoodsTypes() {
+        return subGoodsTypes;
+    }
+
+    public void setSubGoodsTypes(List<GoodsType> subGoodsTypes) {
+        this.subGoodsTypes = subGoodsTypes;
+    }
+
+    public String getType_file_path() {
+        return type_file_path;
+    }
+
+    public void setType_file_path(String type_file_path) {
+        this.type_file_path = type_file_path;
+    }
 
     public String getType_id() {
         return type_id;
@@ -38,14 +67,6 @@ public class GoodsType {
 
     public void setType_enable(String type_enable) {
         this.type_enable = type_enable;
-    }
-
-    public String getType_sup() {
-        return type_sup;
-    }
-
-    public void setType_sup(String type_sup) {
-        this.type_sup = type_sup;
     }
 
     public String getType_level() {
