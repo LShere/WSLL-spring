@@ -66,10 +66,10 @@
 		where goods_id=#{id}
     </select>
 
-    <select id="findGoodsByRand" resultMap="goods">
+    <select id="findGoodsByRand" parameterType="int" resultMap="goods">
         SELECT * FROM `goods`
         WHERE goods_id >= (SELECT floor(RAND() * (SELECT MAX(goods_id) FROM `goods`)))
-        ORDER BY goods_id LIMIT 5;
+        ORDER BY goods_id LIMIT #{num};
     </select>
 
 </mapper>
