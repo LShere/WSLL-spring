@@ -14,6 +14,7 @@ public class Goods {
     private Integer goods_browse;
     private Integer goods_buy;
     private String goods_picture_path;
+    private Date goods_create_time;
 
     public Integer getGoods_id() {
         return goods_id;
@@ -93,5 +94,13 @@ public class Goods {
 
     public void setGoods_picture_path(String goods_picture_path) {
         this.goods_picture_path = goods_picture_path;
+    }
+
+    public Date getGoods_create_time() {
+        return goods_create_time;
+    }
+
+    public void setGoods_create_time(Date goods_create_time) {
+        this.goods_create_time = goods_create_time;
     }
 }

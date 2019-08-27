@@ -13,6 +13,8 @@ public interface GoodsService {
 
     Goods findGoodsById(int id);
 
-    List<Goods> findGoodsByRand();
+    List<Goods> findGoodsByRand(int num);
+
+    List<Goods> findNewGoods(int n);
 
 }
