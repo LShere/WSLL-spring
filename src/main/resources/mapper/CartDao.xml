@@ -8,9 +8,16 @@
         select count(*) from cart where openid=#{openid}
     </select>
 
-    <delete id="deleteCart" parameterType="String">
+    <delete id="deleteCart" parameterType="Map">
         delete from cart where openid=#{openid} and goods_id=#{goods_id}
     </delete>
+
+    <insert id="addCart" parameterType="Map">
+        insert into cart(openid,goods_id,total_num,file_path,goods_price,goods_name)
+        values(#{openid},#{goods_id},#{num},#{file_path},#{goods_price},#{goods_name})
+
+
+    </insert>
 
 
 
