@@ -38,13 +38,13 @@ public class CartServiceImpl implements CartService {
         map.put("goods_id", goods_id);
         map.put("num", num);
 
-        if(cartDao.findCart(map)!=null){
-        for(int i=0;i<num;i++){
-            map.put("sign",1);
-            cartDao.plusMinusCart(map);
-        }
-        return 1;
-        }else {
+        if (cartDao.findCart(map) != null) {
+            for (int i = 0; i < num; i++) {
+                map.put("sign", 1);
+                cartDao.plusMinusCart(map);
+            }
+            return 1;
+        } else {
             Goods goods = new Goods();
             goods = goodsDao.findGoodsById(goods_id);
 
@@ -67,13 +67,16 @@ public class CartServiceImpl implements CartService {
         map.put("goods_id", goods_id);
         map.put("sign", sign);
         Cart cart = cartDao.findCart(map);
-        if(cart.getTotal_num()==1 && sign==0){
+        if (cart.getTotal_num() == 1 && sign == 0) {
             return cartDao.deleteCart(map);
-        }else {
+        } else {
             return cartDao.plusMinusCart(map);
         }
-      
-    public Integer clearCart(String openid) {
+
+
+    }
+    public Integer clearCart (String openid){
         return cartDao.clearCart(openid);
     }
 }
+

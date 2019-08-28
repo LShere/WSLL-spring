@@ -1,7 +1,9 @@
 package spring.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import spring.pojo.Address;
@@ -70,6 +72,27 @@ public class AddressController {
         }else{
             return "fail";
         }
+    }
+    //添加地址
+    @RequestMapping(value = "/addAddress")
+    @ResponseBody
+    public String addAddress(@RequestBody JSONObject jsonObject){
+        String address_id = jsonObject.getString("address_id");
+        String phone = jsonObject.getString("address_id");
+        String region = jsonObject.getJSONObject("address").getString("region");
+        String detail = jsonObject.getJSONObject("address").getString("detail");
+        String openid = jsonObject.getString("openid");
+        String name = jsonObject.getString("name");
+
+        int result=addressService.addAddress(address_id,openid,phone,region,detail,name);
+        if(result>0){
+            return "success";
+        }else{
+            return "fail";
+        }
+
+
+
     }
 
 

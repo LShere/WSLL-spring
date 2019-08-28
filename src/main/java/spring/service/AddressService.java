@@ -8,4 +8,5 @@ public interface AddressService {
 
     public Integer deleteAddress(String address_id);
     public Integer setDefaulted(String address_id);
+    public Integer addAddress(String address_id,String openid,String phone,String region,String detail,String name);
 }

@@ -29,4 +29,8 @@
         select openid from address where address_id=#{address_id}
     </select>
 
+    <insert id="addAddress" parameterType="Map">
+        insert into address values(#{address_id},#{name},#{phone},#{region},#{detail},'false',#{openid})
+    </insert>
+
 </mapper>
