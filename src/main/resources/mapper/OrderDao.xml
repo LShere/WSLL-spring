@@ -11,12 +11,12 @@
         <if test="openid !=null and openid !=''">
             and openid=#{openid}
         </if>
-        <if test="order_id !=0 and order_id !=''">
+        <if test="order_id !=null and order_id !=''">
             and order_id=#{order_id}
         </if>
 
     </select>
-    <delete id="deleteOrder" parameterType="Integer">
+    <delete id="deleteOrder" parameterType="String">
         delete from orders where order_id=#{order_id}
     </delete>
 
