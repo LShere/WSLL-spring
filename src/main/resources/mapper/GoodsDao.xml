@@ -47,10 +47,10 @@
         from goods g
         left join (select type_id,type_name from g_type
         ) t
-        on g.goods_type=t.type_id
+        on (g.goods_type=t.type_id)
         <where>
             <if test="goods_type!=null and goods_type!=''">
-                t.type_name like "%"#{goods_type}"%"
+                g.goods_type = #{goods_type}
             </if>
             <if test="goods_name!=null and goods_name!=''">
                 and goods_name like "%"#{goods_name}"%"
@@ -78,7 +78,7 @@
         on g.goods_type=t.type_id
         <where>
             <if test="goods_type!=null and goods_type!=''">
-                t.type_name like "%"#{goods_type}"%"
+                g.goods_type = #{goods_type}
             </if>
             <if test="goods_name!=null and goods_name!=''">
                 and goods_name like "%"#{goods_name}"%"

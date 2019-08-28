@@ -30,7 +30,7 @@ public class GoodsController {
     public Map<String, Object> findAllGoods() {
         Map<String, Object> map = new HashMap<String, Object>();
         List<Goods> goodsList = goodsService.findAllGoods();
-        if (goodsList == null) {
+        if (goodsList == null || goodsList.size() == 0) {
             map.put("code", 400);
             map.put("message", "不存在商品!");
             return map;
@@ -56,7 +56,8 @@ public class GoodsController {
     public Map<String, Object> findGoods(String goods_type, String goods_name, String goods_describe) {
         Map<String, Object> map = new HashMap<String, Object>();
         List<Goods> goodsList = goodsService.findGoods(goods_type, goods_name, goods_describe);
-        if (goodsList == null) {
+        System.out.println(goodsList);
+        if (goodsList == null || goodsList.size() == 0 ) {
             map.put("code", 400);
             map.put("message", "不存在商品!");
             return map;
@@ -118,7 +119,7 @@ public class GoodsController {
     public Map<String, Object> findGoodsByRand(int num) {
         Map<String, Object> map = new HashMap<String, Object>();
         List<Goods> goodsList = goodsService.findGoodsByRand(num);
-        if (goodsList == null) {
+        if (goodsList == null || goodsList.size() == 0) {
             map.put("code", 400);
             map.put("message", "不存在商品!");
             return map;
@@ -146,7 +147,7 @@ public class GoodsController {
             goodsType.setSubGoodsTypes(goodsTypeService.findParaTypeChildType(Integer.parseInt(goodsType.getType_id())));
             typeListP.set(i, goodsType);
         }
-        if (typeListP == null) {
+        if (typeListP == null || typeListP.size() == 0) {
             map.put("code", 400);
             map.put("message", "不存在!");
             return map;
@@ -166,7 +167,7 @@ public class GoodsController {
     public Map<String, Object> findNewGoods(int n) {
         Map<String, Object> map = new HashMap<String, Object>();
         List<Goods> goodsList = goodsService.findNewGoods(n);
-        if (goodsList == null) {
+        if (goodsList == null || goodsList.size() == 0) {
             map.put("code", 400);
             map.put("message", "不存在商品!");
             return map;
