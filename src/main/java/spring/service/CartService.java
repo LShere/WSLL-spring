@@ -12,5 +12,9 @@ public interface CartService {
     Integer addCart(String openid, Integer goods_id, Integer num);
     public List<Cart> listCart(String openid);
 
+
     Integer plusMinusCart(String openid, Integer goods_id, Integer sign);
+
+    public Integer clearCart(String openid);
+
 }

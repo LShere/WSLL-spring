@@ -103,4 +103,5 @@ public class Goods {
     public void setGoods_create_time(Date goods_create_time) {
         this.goods_create_time = goods_create_time;
     }
+
 }

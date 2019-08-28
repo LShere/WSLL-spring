@@ -3,6 +3,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="spring.dao.GoodsDao">
     <resultMap id="goods" type="spring.pojo.Goods">
+<!--        <id property="goods_id" column="goods_id"/>
+        <result property="goods_type" column="goods_type"/>
+        <result property="goods_name" column="goods_name"/>
+        <result property="goods_describe" column="goods_describe"/>
+        <result property="goods_price" column="goods_price"/>
+        <result property="goods_enable" column="goods_enable"/>
+        <result property="goods_browse" column="goods_browse"/>
+        <result property="goods_buy" column="goods_buy"/>
+        <result property="goods_picture_path" column="goods_picture_path"/>
+        <result property="goods_create_time" column="goods_create_time"/>
+        <association property="goodsType" javaType="spring.pojo.GoodsType">
+            <id property="type" column="type_id"/>
+            <result property="type_name" column="type_name"/>
+         </association>-->
     </resultMap>
 
     <select id="findAllGoods" resultMap="goods">
@@ -29,23 +43,48 @@
         g.goods_browse,
         g.goods_buy,
         g.goods_picture_path,
-        g.goods_create_time,
+        g.goods_create_time
         from goods g
         left join (select type_id,type_name from g_type
         ) t
-        on g.goods_type=t.type_id
- 		<where>
-            <if test="goods_id!=null and goods_id!=''">
-                goods_id=#{goods_id}
-            </if>
+        on (g.goods_type=t.type_id)
+        <where>
             <if test="goods_type!=null and goods_type!=''">
-                and goods_type=#{goods_type}
+                g.goods_type = #{goods_type}
             </if>
             <if test="goods_name!=null and goods_name!=''">
                 and goods_name like "%"#{goods_name}"%"
             </if>
             <if test="goods_describe!=null and goods_describe!=''">
-                and goods_describe=#{goods_describe}
+                and goods_describe like "%"#{goods_describe}"%"
+            </if>
+        </where>
+    </select>
+
+    <select id="findGoods" resultMap="goods" parameterType="Map">
+        select g.goods_id,
+        t.type_name as goods_type,
+        g.goods_name,
+        g.goods_describe,
+        g.goods_price,
+        g.goods_enable,
+        g.goods_browse,
+        g.goods_buy,
+        g.goods_picture_path,
+        g.goods_create_time
+        from goods g
+        left join (select type_id,type_name from g_type
+        ) t
+        on g.goods_type=t.type_id
+        <where>
+            <if test="goods_type!=null and goods_type!=''">
+                g.goods_type = #{goods_type}
+            </if>
+            <if test="goods_name!=null and goods_name!=''">
+                and goods_name like "%"#{goods_name}"%"
+            </if>
+            <if test="goods_describe!=null and goods_describe!=''">
+                and goods_describe like "%"#{goods_describe}"%"
             </if>
         </where>
     </select>
@@ -99,5 +138,33 @@
         FROM goods
 		order by goods_create_time desc limit #{n}
     </select>
+
+    <insert id="addGoods" parameterType="Map">
+        insert INTO
+        goods(
+        goods_id,
+        goods_type,
+        goods_name,
+        goods_describe,
+        goods_price,
+        goods_enable,
+        goods_browse,
+        goods_buy,
+        goods_picture_path,
+        goods_create_time
+        )
+        values(
+        #{goods_id},
+        #{goods_type},
+        #{goods_name},
+        #{goods_describe},
+        #{goods_price},
+        #{goods_enable},
+        #{goods_browse},
+        #{goods_buy},
+        #{goods_picture_path},
+        #{goods_create_time}
+        )
+    </insert>
 
 </mapper>

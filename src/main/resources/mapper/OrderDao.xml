@@ -20,5 +20,10 @@
         delete from orders where order_id=#{order_id}
     </delete>
 
+    <insert id="addOrderBuyNow" parameterType="orders">
+        insert into orders values
+        (#{order_id}, #{openid}, #{pay_status}, #{create_time}, #{pay_price})
+    </insert>
+
 
 </mapper>
