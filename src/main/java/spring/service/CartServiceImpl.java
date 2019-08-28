@@ -67,11 +67,12 @@ public class CartServiceImpl implements CartService {
         map.put("goods_id", goods_id);
         map.put("sign", sign);
         Cart cart = cartDao.findCart(map);
-        if(cart.getTotal_num()==1 && sign==0){
+        if (cart.getTotal_num() == 1 && sign == 0) {
             return cartDao.deleteCart(map);
-        }else {
+        } else {
             return cartDao.plusMinusCart(map);
         }
+    }
       
     public Integer clearCart(String openid) {
         return cartDao.clearCart(openid);
