@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.dao.AddressDao">
+
+    <delete id="deleteAddress" parameterType="String">
+        delete from Address where address_id=#{address_id}
+    </delete>
+
+<!--    <insert id="addCart" parameterType="Map">
+        insert into cart(openid,goods_id,total_num,file_path,goods_price,goods_name)
+        values(#{openid},#{goods_id},#{num},#{file_path},#{goods_price},#{goods_name})
+    </insert>-->
+
+    <select id="listAddress" resultType="Address" parameterType="String">
+        select * from address where openid=#{openid}
+    </select>
+
+    <update id="setDefaulted" parameterType="Map">
+
+         update address set defaulted = case when (openid=#{openid} and address_id!=#{address_id})
+         then 'false' when address_id = #{address_id} then 'true'
+         end
+
+
+    </update>
+
+    <select id="findOpenId" resultType="String" parameterType="String">
+        select openid from address where address_id=#{address_id}
+    </select>
+
+    <insert id="addAddress" parameterType="Map">
+        insert into address values(#{address_id},#{name},#{phone},#{region},#{detail},'false',#{openid})
+    </insert>
+
+</mapper>
