@@ -1,9 +1,11 @@
 package spring.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import spring.pojo.Goods;
 import spring.pojo.GoodsType;
@@ -182,8 +184,57 @@ public class GoodsController {
     /*插入商品表*/
     @GetMapping(value = "/addGoods")
     @ResponseBody
-    public int addGoods(Goods goods) {
+    public int addGoods(@RequestBody JSONObject jsonObject) {
+        Goods goods=new Goods();
+
+        /*获取传入数据插入goods*/
+        goods.setGoods_type(jsonObject.getString("goods_type"));
+        goods.setGoods_name(jsonObject.getString("goods_name"));
+        goods.setGoods_describe(jsonObject.getString("goods_describe"));
+        goods.setGoods_price(jsonObject.getFloat("goods_price"));
+        goods.setGoods_validity(jsonObject.getDate("goods_validity"));
+        goods.setGoods_enable(jsonObject.getString("goods_enable"));
+        goods.setGoods_browse(jsonObject.getInteger("goods_browse"));
+        goods.setGoods_buy(jsonObject.getInteger("goods_buy"));
+        goods.setGoods_picture_path(jsonObject.getString("goods_picture_path"));
+        goods.setGoods_create_time(jsonObject.getDate("goods_create_time"));
+
+        System.out.println(goods);
+
         int rows = this.goodsService.addGoods(goods);
+        return rows;
+    }
+
+    /*修改商品表信息*/
+    @GetMapping(value = "/updateGoods")
+    @ResponseBody
+    public int updateFGoods(@RequestBody JSONObject jsonObject) {
+
+        Goods goods=new Goods();
+
+        /*获取传入数据插入goods*/
+        goods.setGoods_id(jsonObject.getInteger("goods_id"));
+        goods.setGoods_type(jsonObject.getString("goods_type"));
+        goods.setGoods_name(jsonObject.getString("goods_name"));
+        goods.setGoods_describe(jsonObject.getString("goods_describe"));
+        goods.setGoods_price(jsonObject.getFloat("goods_price"));
+        goods.setGoods_validity(jsonObject.getDate("goods_validity"));
+        goods.setGoods_enable(jsonObject.getString("goods_enable"));
+        goods.setGoods_browse(jsonObject.getInteger("goods_browse"));
+        goods.setGoods_buy(jsonObject.getInteger("goods_buy"));
+        goods.setGoods_picture_path(jsonObject.getString("goods_picture_path"));
+        goods.setGoods_create_time(jsonObject.getDate("goods_create_time"));
+
+        System.out.println(goods);
+        int rows = this.goodsService.updateGoods(goods);
+        return rows;
+    }
+
+    /*删除商品表信息*/
+    @GetMapping(value = "/deleteGoodsById")
+    @ResponseBody
+    public int deleteGoodsById(int id) {
+        int rows = this.goodsService.deleteGoodsById(id);
         return rows;
     }
 

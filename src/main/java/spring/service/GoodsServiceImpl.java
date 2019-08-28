@@ -85,4 +85,12 @@ public class GoodsServiceImpl implements GoodsService {
     public int addGoods(Goods goods) {
         return this.goodsDao.addGoods(goods);
     }
+
+    public int updateGoods(Goods goods) {
+        return this.goodsDao.updateGoods(goods);
+    }
+
+    public int deleteGoodsById(int id) {
+        return this.goodsDao.deleteGoodsById(id);
+    }
 }
