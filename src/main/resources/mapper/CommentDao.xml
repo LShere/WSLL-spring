@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.dao.CommentDao">
+
+    <insert id="addComment" parameterType="comment">
+        insert into comment(openid, order_id, starIndex, comment)
+        values (#{openid}, #{order_id}, #{starIndex}, #{comment})
+    </insert>
+
+<!--    查询所有的评论-->
+    <resultMap id="getGoods" type="comment">
+        <id property="id" column="id" />
+        <result property="order_id" column="order_id" />
+        <result property="openid" column="openid" />
+        <result property="starIndex" column="starIndex" />
+        <result property="comment" column="comment" />
+        <association property="user" javaType="user">
+            <id property="openid" column="openid" />
+            <result property="nickname" column="nickname" />
+            <result property="avatarUrl" column="avatarUrl" />
+        </association>
+        <association property="orders" javaType="orders">
+            <id property="order_id" column="order_id" />
+            <result property="goods_id" column="goods_id" />
+            <collection property="goodsOrdersList" ofType="goodsOrders">
+                <result property="order_id" column="order_id" />
+                <result property="goods_id" column="goods_id" />
+                <association property="goods" javaType="goods">
+                    <id property="goods_id" column="goods_id" />
+                    <result property="goods_picture_path" column="goods_picture_path" />
+                </association>
+            </collection>
+        </association>
+    </resultMap>
+    <select id="getCommentList" resultMap="getGoods">
+        SELECT
+            u.openid,
+            u.nickname,
+            u.avatarUrl,
+            c.starIndex,
+            c.`comment`,
+            g.goods_picture_path
+        FROM
+            `comment` AS c ,
+            `user` AS u ,
+            goods AS g ,
+            order_goods AS og ,
+            orders AS o
+        WHERE
+            c.openid = u.openid AND
+            c.order_id = o.order_id AND
+            o.order_id = og.order_id AND
+            og.goods_id = g.goods_id
+    </select>
+
+
+</mapper>

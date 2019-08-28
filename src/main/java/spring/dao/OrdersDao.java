@@ -24,6 +24,9 @@ public interface OrdersDao {
 
     public Integer receiveOrder(String order_id);
 
+    public Integer completeOrder(String order_id);
+
+
 //    public Integer addOrderFromCart(Orders orders); //添加订单同时清空购物车
 
 }

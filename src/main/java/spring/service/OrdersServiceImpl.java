@@ -42,4 +42,8 @@ OrdersDao ordersDao;
         return ordersDao.receiveOrder(order_id);
     }
 
+    public Integer completeOrder(String order_id) {
+        return ordersDao.completeOrder(order_id);
+    }
+
 }

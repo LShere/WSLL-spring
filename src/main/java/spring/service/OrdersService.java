@@ -21,4 +21,7 @@ public interface OrdersService {
 
     public Integer receiveOrder(String order_id);
 
+    public Integer completeOrder(String order_id);
+
+
 }
