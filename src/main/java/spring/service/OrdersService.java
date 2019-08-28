@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface OrdersService {
-    public List<Orders> findOrdersByOpenid(String openid,int order_id);
-    public int deleteOrder(int order_id);
+    public List<Orders> findOrdersByOpenid(String openid,String order_id);
+    public int deleteOrder(String order_id);
 
     public Integer addOrderBuyNow(Orders orders);
 

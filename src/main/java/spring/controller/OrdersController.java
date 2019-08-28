@@ -28,7 +28,7 @@ public class OrdersController {
     //根据用户id和订单id查找订单
     @RequestMapping(value = "/findOrdersByOpenid")
     @ResponseBody
-    public List<Orders> findOrdersByOpenid(String openid, @RequestParam(defaultValue = "0") int order_id) {
+    public List<Orders> findOrdersByOpenid(String openid,  String order_id) {
 
         return ordersService.findOrdersByOpenid(openid, order_id);
 
@@ -36,7 +36,7 @@ public class OrdersController {
     //删除订单
     @RequestMapping(value = "/deleteOrder")
     @ResponseBody
-    public String deleteOrder(int order_id){
+    public String deleteOrder(String order_id){
         int result = ordersService.deleteOrder(order_id);
         if(result>0){
             return "success";
