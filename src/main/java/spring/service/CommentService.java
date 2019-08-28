@@ -8,7 +8,6 @@ import java.util.Map;
 public interface CommentService {
     public Integer addComment(Comment comment);
 
-    public List getCommentList();
 
 
 }

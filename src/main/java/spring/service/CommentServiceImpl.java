@@ -18,7 +18,4 @@ public class CommentServiceImpl implements CommentService{
         return commentDao.addComment(comment);
     }
 
-    public List getCommentList() {
-        return commentDao.getCommentList();
-    }
 }
