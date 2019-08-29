@@ -25,6 +25,7 @@ public class ValidateLoginController {
         String code = "";
         String grant_type = "";
         String nickname = "";
+        String avatarUrl = "";
         try {
             //解析json数据
             //System.out.println(object.getString("code"));
@@ -34,6 +35,7 @@ public class ValidateLoginController {
             grant_type = "authorization_code";
 
             nickname = object.getString("nickname");
+            avatarUrl = object.getString("avatarUrl");
             //先判断数据库中是否存在所请求的openid
             User user = userService.findUserByName(nickname);
             if (user == null || "".equals(user.getOpenid())) {
@@ -43,7 +45,7 @@ public class ValidateLoginController {
                 //将字符串转化为jsonobject
                 JSONObject object1 = JSON.parseObject(result);
                 String openid = object1.getString("openid");
-                User user1 = new User(openid, nickname);
+                User user1 = new User(openid, nickname, avatarUrl);
                 int insertResult = userService.addUser(user1);
                 if (insertResult > 0) {
                     System.out.println("添加用户成功");

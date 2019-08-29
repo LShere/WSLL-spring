@@ -93,4 +93,12 @@
         </set>
         where order_id = #{order_id}
     </update>
+<!--    评价完毕-->
+    <update id="completeOrder" parameterType="String">
+        update orders
+        <set>
+            pay_status = '已完成'
+        </set>
+        where order_id = #{order_id}
+    </update>
 </mapper>

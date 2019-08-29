@@ -18,7 +18,7 @@ public interface CartDao {
     public Cart findCart(Map map);
 
     Integer plusMinusCart(Map<String, Object> map);
-  
+
     public Integer clearCart(String openid); //清空购物车
 
 }

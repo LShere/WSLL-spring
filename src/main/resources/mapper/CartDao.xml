@@ -21,13 +21,15 @@
         select * from cart where openid=#{openid}
     </select>
     <update id="plusMinusCart" parameterType="Map">
-        update cart set total_num=
-        <if test="sign == 0">
-            total_num-1
-        </if>
-        <if test="sign == 1">
-            total_num+1
-        </if>
+        update cart
+            <set>
+                <if test="sign == 0">
+                    total_num=total_num-1
+                </if>
+                <if test="sign == 1">
+                    total_num=total_num+1
+                </if>
+            </set>
         where openid=#{openid}and goods_id=#{goods_id}
     </update>
 

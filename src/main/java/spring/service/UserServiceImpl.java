@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import spring.dao.UserDao;
 import spring.pojo.User;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -23,5 +25,9 @@ public class UserServiceImpl implements UserService {
 
     public User findUserByName(String nickname) {
         return userDao.findUserByName(nickname);
+    }
+
+    public List getCommentList() {
+        return userDao.getCommentList();
     }
 }
