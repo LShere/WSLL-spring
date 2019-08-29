@@ -31,7 +31,6 @@ public class OrdersController {
     public List<Orders> findOrdersByOpenid(String openid,  String order_id) {
 
         return ordersService.findOrdersByOpenid(openid, order_id);
-
     }
     //删除订单
     @RequestMapping(value = "/deleteOrder")

@@ -11,21 +11,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import spring.pojo.Goods;
+import spring.pojo.Orders;
 import spring.service.GoodsService;
+import spring.service.OrdersService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/admin")
 public class GoodsControllerAdmin {
     @Autowired
     private GoodsService goodsService;
+    @Autowired
+    private OrdersService ordersService;
 
     /*插入商品表的正确姿势*/
     @PostMapping(value = "addGood")
@@ -121,6 +122,26 @@ public class GoodsControllerAdmin {
             map.put("img", fileName);
             return map;
         }
+    }
+
+    /*根据id删除订单表*/
+    @RequestMapping(value = "deleteOrder")
+    @ResponseBody
+    public String deleteOrder(String order_id){
+        int result = ordersService.deleteOrder(order_id);
+        if(result>0){
+            return "success";
+        }else{
+            return "fail";
+        }
+    }
+
+    //根据用户id和订单id查找订单
+    @RequestMapping(value = "findOrdersByOpenid")
+    @ResponseBody
+    public List<Orders> findOrdersByOpenid(String openid, String order_id) {
+
+        return ordersService.findOrdersByOpenid(openid, order_id);
     }
 
 
