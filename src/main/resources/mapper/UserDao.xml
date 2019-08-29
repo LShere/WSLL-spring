@@ -17,10 +17,61 @@
 
 <!--    添加用户-->
     <insert id="addUser" parameterType="user">
-        insert into user values (#{openid}, #{nickname})
+        insert into user values (#{openid}, #{nickname}, #{avatarUrl})
     </insert>
 <!--    根据用户id查询相应用户-->
     <select id="findUserById" resultType="user" parameterType="String">
 		select * from user where openid=#{openid}
 	</select>
+
+<!--    获取所有的评论-->
+    <resultMap id="getComments" type="user">
+        <id property="openid" column="openid" />
+        <result property="nickname" column="nickname" />
+        <result property="avatarUrl" column="avatarUrl" />
+        <collection property="comments" ofType="comment">
+            <result property="openid" column="openid" />
+            <result property="order_id" column="order_id" />
+            <result property="starIndex" column="starIndex" />
+            <result property="comment" column="comment" />
+            <association property="orders" javaType="orders">
+                <id property="order_id" column="order_id" />
+                <result property="goods_id" column="goods_id" />
+                <collection property="goodsOrdersList" ofType="goodsOrders">
+                    <id property="id" column="id" />
+                    <result property="order_id" column="order_id" />
+                    <result property="goods_id" column="goods_id" />
+                    <association property="goods" javaType="goods">
+                        <id property="goods_id" column="goods_id" />
+                        <result property="goods_picture_path" column="goods_picture_path" />
+                    </association>
+                </collection>
+            </association>
+        </collection>
+    </resultMap>
+    <select id="getCommentList" resultMap="getComments">
+--  所涉及到的表都需要有字段被查询（md坑了我一晚)
+            SELECT
+                u.openid,
+                u.nickname,
+                u.avatarUrl,
+                c.starIndex,
+                c.comment,
+                g.goods_picture_path,
+                og.order_id
+            FROM
+                comment c ,
+                user u ,
+                goods g ,
+                order_goods  og ,
+                orders  o
+            WHERE
+                c.openid = u.openid AND
+                c.order_id = o.order_id AND
+                o.order_id = og.order_id AND
+                og.goods_id = g.goods_id
+
+    </select>
+
+
 </mapper>

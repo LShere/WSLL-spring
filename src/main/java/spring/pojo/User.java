@@ -1,15 +1,20 @@
 package spring.pojo;
 
+import java.util.List;
+
 public class User {
     private String openid;
     private String nickname;
+    private String avatarUrl;
+    private List<Comment> comments;
 
     public User() {
     }
 
-    public User(String openid, String nickname) {
+    public User(String openid, String nickname, String avatarUrl) {
         this.openid = openid;
         this.nickname = nickname;
+        this.avatarUrl = avatarUrl;
     }
 
     public String getOpenid() {
@@ -28,4 +33,19 @@ public class User {
         this.nickname = nickname;
     }
 
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 }

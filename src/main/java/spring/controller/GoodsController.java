@@ -1,13 +1,16 @@
 package spring.controller;
 
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientHandlerException;
+import com.sun.jersey.api.client.UniformInterfaceException;
+import com.sun.jersey.api.client.WebResource;
+import org.apache.commons.io.FilenameUtils;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import spring.pojo.Goods;
 import spring.pojo.GoodsType;
 import spring.pojo.Page;
@@ -18,6 +21,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 public class GoodsController {
@@ -60,7 +68,7 @@ public class GoodsController {
         Map<String, Object> map = new HashMap<String, Object>();
         List<Goods> goodsList = goodsService.findGoods(goods_type, goods_name, goods_describe);
         System.out.println(goodsList);
-        if (goodsList == null || goodsList.size() == 0) {
+        if (goodsList == null || goodsList.size() == 0 ) {
             map.put("code", 400);
             map.put("message", "不存在商品!");
             return map;
@@ -186,7 +194,7 @@ public class GoodsController {
     @GetMapping(value = "/addGoods")
     @ResponseBody
     public int addGoods(@RequestBody JSONObject jsonObject) {
-        Goods goods = new Goods();
+        Goods goods=new Goods();
 
         /*获取传入数据插入goods*/
         goods.setGoods_type(jsonObject.getString("goods_type"));
@@ -219,7 +227,7 @@ public class GoodsController {
     @ResponseBody
     public int updateFGoods(@RequestBody JSONObject jsonObject) {
 
-        Goods goods = new Goods();
+        Goods goods=new Goods();
 
         /*获取传入数据插入goods*/
         goods.setGoods_id(jsonObject.getInteger("goods_id"));
@@ -246,5 +254,62 @@ public class GoodsController {
         int rows = this.goodsService.deleteGoodsById(id);
         return rows;
     }
+
+
+    /*上传静态文件*/
+    public String putStatic(MultipartFile file) throws UniformInterfaceException, ClientHandlerException, IOException {
+
+        //配置访问前缀
+        //String path = "http://120.77.209.0:/usr/WSLL-static/goods/";
+        String path = "http://120.77.209.0/img/";
+
+        //设置文件名，时间+4个随机数
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        StringBuilder fileName = new StringBuilder(sdf.format(date));
+        for (int i = 0; i < 4; i++) {
+            Random r = new Random();
+            String str = String.valueOf(r.nextInt(10));
+            fileName.append(str);
+        }
+        fileName.append("."+FilenameUtils.getExtension(file.getOriginalFilename()));
+
+        //合并路径
+        String url = path + fileName.toString();
+
+        //生成一个网络资源
+        Client client = new Client();
+
+        //生成web资源
+        WebResource resource = client.resource(url);
+
+        //通过网络资源往指定地址存放文件
+        resource.put(String.class, file.getBytes());
+
+        return fileName.toString();
+    }
+
+    /*上传文件，并修改数据库*/
+    @RequestMapping(value = "/upload",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> doEdit(MultipartFile file, HttpServletRequest res,Integer id) throws UniformInterfaceException, IOException {
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        String fileName = putStatic(file);
+
+
+
+        if (fileName == null ) {
+            map.put("code", 400);
+            map.put("message", "图片上传失败！");
+            return map;
+        } else {
+            map.put("code", 200);
+            map.put("message", "图片上传成功!");
+            map.put("img", fileName);
+            return map;
+        }
+    }
+
 
 }
