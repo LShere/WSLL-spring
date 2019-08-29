@@ -19,7 +19,7 @@ public class loginController {
     @Autowired
     private AdminSedrvice adminSedrvice;
 
-    @PostMapping(value = "/login")
+    @PostMapping(value = "/loginAdmin")
     @ResponseBody
     public Map<String, Object> loginTest(@Param("username") String username, @RequestParam String password) {
         Map<String, Object> map = new HashMap<String, Object>();

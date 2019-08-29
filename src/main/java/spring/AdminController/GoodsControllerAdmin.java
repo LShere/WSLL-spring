@@ -104,14 +104,12 @@ public class GoodsControllerAdmin {
     }
 
     /*上传文件，并修改数据库*/
-    @RequestMapping(value = "upload", method = RequestMethod.POST)
+    @PostMapping(value = "upload")
     @ResponseBody
     public Map<String, Object> doEdit(MultipartFile file, HttpServletRequest res, Integer id) throws UniformInterfaceException, IOException {
         Map<String, Object> map = new HashMap<String, Object>();
-
+        System.out.println("file:" + file);
         String fileName = putStatic(file);
-
-
         if (fileName == null) {
             map.put("code", 400);
             map.put("message", "图片上传失败！");
@@ -127,11 +125,11 @@ public class GoodsControllerAdmin {
     /*根据id删除订单表*/
     @RequestMapping(value = "deleteOrder")
     @ResponseBody
-    public String deleteOrder(String order_id){
+    public String deleteOrder(String order_id) {
         int result = ordersService.deleteOrder(order_id);
-        if(result>0){
+        if (result > 0) {
             return "success";
-        }else{
+        } else {
             return "fail";
         }
     }
