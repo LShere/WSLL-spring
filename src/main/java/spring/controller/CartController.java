@@ -13,12 +13,13 @@ import java.util.List;
 
 @Controller
 public class CartController {
+
     @Autowired
     CartService cartService;
     //购物车中种类数量
     @RequestMapping(value = "/countCart")
     @ResponseBody
-    public int countCart(String openid){
+    public Integer countCart(String openid){
         return  cartService.countCart(openid);
     }
 
@@ -26,7 +27,7 @@ public class CartController {
     //删除购物车
     @RequestMapping(value = "/deleteCart")
     @ResponseBody
-    public String deleteCart(String openid,int goods_id){
+    public String deleteCart(String openid,Integer goods_id){
         int result = cartService.deleteCart(openid,goods_id);
         if(result > 0){
             return "success";
@@ -37,8 +38,9 @@ public class CartController {
     //添加购物车
     @RequestMapping(value = "/addCart")
     @ResponseBody
-    public String addCart(String openid, int goods_id, int num){
-        int result = cartService.addCart(openid,goods_id,num);
+    public String addCart(String openid,Integer goods_id,Integer num){
+        Integer result = cartService.addCart(openid,goods_id,num);
+
         if(result>0){
             return "success";
         }else {
@@ -53,8 +55,21 @@ public class CartController {
 
         System.out.println("执行了查询方法");
         return cartService.listCart(openid);
-
     }
+
+    //购物车加减0减1加
+    @RequestMapping(value = "/plusMinusCart")
+    @ResponseBody
+    public String plusMinusCart(String openid,Integer goods_id,Integer sign){
+
+        Integer result=cartService.plusMinusCart(openid,goods_id,sign);
+        if(result>0){
+            return "success";
+        }else{
+            return "fail";
+        }
+    }
+
     //清空购物车
     @RequestMapping("/clearCart")
     @ResponseBody

@@ -11,19 +11,94 @@
         <if test="openid !=null and openid !=''">
             and openid=#{openid}
         </if>
-        <if test="order_id !=0 and order_id !=''">
+        <if test="order_id !=null and order_id !=''">
             and order_id=#{order_id}
         </if>
 
     </select>
-    <delete id="deleteOrder" parameterType="Integer">
+    <delete id="deleteOrder" parameterType="String">
         delete from orders where order_id=#{order_id}
     </delete>
 
+<!--    本插入适用于加入购物车和直接购买-->
     <insert id="addOrderBuyNow" parameterType="orders">
         insert into orders values
         (#{order_id}, #{openid}, #{pay_status}, #{create_time}, #{pay_price})
     </insert>
+<!--    获得所有订单-->
+    <resultMap id="goodsOrders" type="orders">
+        <id property="order_id" column="order_id" />
+        <result property="openid" column="openid" />
+        <result property="pay_status" column="pay_status" />
+        <result property="create_time" column="create_time" />
+        <result property="pay_price" column="pay_price" />
+        <collection property="goodsOrdersList" ofType="goodsOrders">
+            <id property="id" column="id" />
+            <result property="num" column="num" />
+            <association property="goods" javaType="goods">
+                <id property="goods_id" column="goods_id" />
+                <result property="goods_name" column="goods_name" />
+                <result property="goods_price" column="goods_price" />
+                <result property="goods_picture_path" column="goods_picture_path" />
+            </association>
+        </collection>
+    </resultMap>
+    <select id="getAllOrders" parameterType="String" resultMap="goodsOrders">
+        SELECT
+            o.order_id,
+            o.openid,
+            o.pay_status,
+            o.create_time,
+            o.pay_price,
+            g.goods_picture_path,
+            g.goods_price,
+            g.goods_name,
+            og.goods_id,
+            og.num
+        FROM
+            orders AS o LEFT JOIN order_goods AS og
+        ON
+            o.order_id = og.order_id
+        LEFT JOIN
+            goods g
+        ON
+            og.goods_id = g.goods_id
+        WHERE
+            o.openid = #{openid}
+    </select>
+<!--    获得订单种类和数量-->
+    <select id="getOrdersSortAndNum" parameterType="String" resultType="orders">
+        select pay_status from orders where openid = #{openid}
+    </select>
 
+<!--    取消订单-->
+    <delete id="cancelOrder" parameterType="String">
+        delete from orders where order_id = #{order_id}
+    </delete>
 
+<!--    假支付-->
+    <update id="payOrder" parameterType="String">
+        update orders
+        <set>
+            pay_status = '待收货'
+        </set>
+        where order_id = #{order_id}
+    </update>
+
+<!--    收货-->
+    <update id="receiveOrder" parameterType="String">
+        update orders
+        <set>
+            pay_status = '待评价'
+        </set>
+        where order_id = #{order_id}
+    </update>
+<!--    评价完毕-->
+    <update id="completeOrder" parameterType="String">
+        update orders
+        <set>
+            pay_status = '已完成'
+        </set>
+        where order_id = #{order_id}
+    </update>
 </mapper>

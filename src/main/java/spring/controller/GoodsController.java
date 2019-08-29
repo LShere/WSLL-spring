@@ -1,9 +1,11 @@
 package spring.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import spring.pojo.Goods;
 import spring.pojo.GoodsType;
@@ -30,7 +32,7 @@ public class GoodsController {
     public Map<String, Object> findAllGoods() {
         Map<String, Object> map = new HashMap<String, Object>();
         List<Goods> goodsList = goodsService.findAllGoods();
-        if (goodsList == null) {
+        if (goodsList == null || goodsList.size() == 0) {
             map.put("code", 400);
             map.put("message", "不存在商品!");
             return map;
@@ -56,7 +58,8 @@ public class GoodsController {
     public Map<String, Object> findGoods(String goods_type, String goods_name, String goods_describe) {
         Map<String, Object> map = new HashMap<String, Object>();
         List<Goods> goodsList = goodsService.findGoods(goods_type, goods_name, goods_describe);
-        if (goodsList == null) {
+        System.out.println(goodsList);
+        if (goodsList == null || goodsList.size() == 0 ) {
             map.put("code", 400);
             map.put("message", "不存在商品!");
             return map;
@@ -118,7 +121,7 @@ public class GoodsController {
     public Map<String, Object> findGoodsByRand(int num) {
         Map<String, Object> map = new HashMap<String, Object>();
         List<Goods> goodsList = goodsService.findGoodsByRand(num);
-        if (goodsList == null) {
+        if (goodsList == null || goodsList.size() == 0) {
             map.put("code", 400);
             map.put("message", "不存在商品!");
             return map;
@@ -146,7 +149,7 @@ public class GoodsController {
             goodsType.setSubGoodsTypes(goodsTypeService.findParaTypeChildType(Integer.parseInt(goodsType.getType_id())));
             typeListP.set(i, goodsType);
         }
-        if (typeListP == null) {
+        if (typeListP == null || typeListP.size() == 0) {
             map.put("code", 400);
             map.put("message", "不存在!");
             return map;
@@ -166,7 +169,7 @@ public class GoodsController {
     public Map<String, Object> findNewGoods(int n) {
         Map<String, Object> map = new HashMap<String, Object>();
         List<Goods> goodsList = goodsService.findNewGoods(n);
-        if (goodsList == null) {
+        if (goodsList == null || goodsList.size() == 0) {
             map.put("code", 400);
             map.put("message", "不存在商品!");
             return map;
@@ -181,8 +184,57 @@ public class GoodsController {
     /*插入商品表*/
     @GetMapping(value = "/addGoods")
     @ResponseBody
-    public int addGoods(Goods goods) {
+    public int addGoods(@RequestBody JSONObject jsonObject) {
+        Goods goods=new Goods();
+
+        /*获取传入数据插入goods*/
+        goods.setGoods_type(jsonObject.getString("goods_type"));
+        goods.setGoods_name(jsonObject.getString("goods_name"));
+        goods.setGoods_describe(jsonObject.getString("goods_describe"));
+        goods.setGoods_price(jsonObject.getFloat("goods_price"));
+        goods.setGoods_validity(jsonObject.getDate("goods_validity"));
+        goods.setGoods_enable(jsonObject.getString("goods_enable"));
+        goods.setGoods_browse(jsonObject.getInteger("goods_browse"));
+        goods.setGoods_buy(jsonObject.getInteger("goods_buy"));
+        goods.setGoods_picture_path(jsonObject.getString("goods_picture_path"));
+        goods.setGoods_create_time(jsonObject.getDate("goods_create_time"));
+
+        System.out.println(goods);
+
         int rows = this.goodsService.addGoods(goods);
+        return rows;
+    }
+
+    /*修改商品表信息*/
+    @GetMapping(value = "/updateGoods")
+    @ResponseBody
+    public int updateFGoods(@RequestBody JSONObject jsonObject) {
+
+        Goods goods=new Goods();
+
+        /*获取传入数据插入goods*/
+        goods.setGoods_id(jsonObject.getInteger("goods_id"));
+        goods.setGoods_type(jsonObject.getString("goods_type"));
+        goods.setGoods_name(jsonObject.getString("goods_name"));
+        goods.setGoods_describe(jsonObject.getString("goods_describe"));
+        goods.setGoods_price(jsonObject.getFloat("goods_price"));
+        goods.setGoods_validity(jsonObject.getDate("goods_validity"));
+        goods.setGoods_enable(jsonObject.getString("goods_enable"));
+        goods.setGoods_browse(jsonObject.getInteger("goods_browse"));
+        goods.setGoods_buy(jsonObject.getInteger("goods_buy"));
+        goods.setGoods_picture_path(jsonObject.getString("goods_picture_path"));
+        goods.setGoods_create_time(jsonObject.getDate("goods_create_time"));
+
+        System.out.println(goods);
+        int rows = this.goodsService.updateGoods(goods);
+        return rows;
+    }
+
+    /*删除商品表信息*/
+    @GetMapping(value = "/deleteGoodsById")
+    @ResponseBody
+    public int deleteGoodsById(int id) {
+        int rows = this.goodsService.deleteGoodsById(id);
         return rows;
     }
 

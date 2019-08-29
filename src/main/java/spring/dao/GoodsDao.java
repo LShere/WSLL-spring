@@ -23,4 +23,9 @@ public interface GoodsDao {
     List<Goods> findNewGoods(int n);
 
     int addGoods(Goods goods);
+
+    int updateGoods(Goods goods);
+
+    int deleteGoodsById(int id);
+
 }

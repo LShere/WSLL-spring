@@ -33,6 +33,7 @@
 		from goods
 	</select>
 
+    <!--分页查询-->
     <select id="findGoodsPage" resultMap="goods" parameterType="Map">
         select g.goods_id,
         t.type_name as goods_type,
@@ -47,10 +48,10 @@
         from goods g
         left join (select type_id,type_name from g_type
         ) t
-        on g.goods_type=t.type_id
+        on (g.goods_type=t.type_id)
         <where>
             <if test="goods_type!=null and goods_type!=''">
-                t.type_name like "%"#{goods_type}"%"
+                g.goods_type = #{goods_type}
             </if>
             <if test="goods_name!=null and goods_name!=''">
                 and goods_name like "%"#{goods_name}"%"
@@ -61,6 +62,7 @@
         </where>
     </select>
 
+    <!--查询所有商品信息-->
     <select id="findGoods" resultMap="goods" parameterType="Map">
         select g.goods_id,
         t.type_name as goods_type,
@@ -78,7 +80,7 @@
         on g.goods_type=t.type_id
         <where>
             <if test="goods_type!=null and goods_type!=''">
-                t.type_name like "%"#{goods_type}"%"
+                g.goods_type = #{goods_type}
             </if>
             <if test="goods_name!=null and goods_name!=''">
                 and goods_name like "%"#{goods_name}"%"
@@ -93,6 +95,7 @@
         select count(*) from goods
     </select>
 
+    <!--根据id查询商品信息-->
     <select id="findGoodsById" resultMap="goods" parameterType="int">
         select goods_id,
         goods_type,
@@ -108,6 +111,7 @@
 		where goods_id=#{id}
     </select>
 
+    <!--随机返回商品的信息-->
     <select id="findGoodsByRand" parameterType="int" resultMap="goods">
         SELECT goods_id,
         goods_type,
@@ -124,6 +128,7 @@
         ORDER BY goods_id LIMIT #{num}
     </select>
 
+    <!--查询商品表信息 选择商品的添加时间最晚的记录-->
     <select id="findNewGoods" parameterType="int" resultMap="goods">
         SELECT goods_id,
         goods_type,
@@ -139,10 +144,10 @@
 		order by goods_create_time desc limit #{n}
     </select>
 
-    <insert id="addGoods" parameterType="Map">
+    <!--插入商品表-->
+    <insert id="addGoods" parameterType="goods">
         insert INTO
         goods(
-        goods_id,
         goods_type,
         goods_name,
         goods_describe,
@@ -154,7 +159,6 @@
         goods_create_time
         )
         values(
-        #{goods_id},
         #{goods_type},
         #{goods_name},
         #{goods_describe},
@@ -165,6 +169,32 @@
         #{goods_picture_path},
         #{goods_create_time}
         )
+
     </insert>
+
+    <!--更新商品表-->
+    <update id="updateGoods" parameterType="goods">
+
+        update goods
+
+        set
+        goods_type=#{goods_type},
+        goods_name=#{goods_name},
+        goods_describe=#{goods_describe},
+        goods_price=#{goods_price},
+        goods_enable=#{goods_enable},
+        goods_browse=#{goods_browse},
+        goods_buy=#{goods_buy},
+        goods_picture_path=#{goods_picture_path},
+        goods_create_time=#{goods_create_time}
+
+        where goods_id=${goods_id}
+
+    </update>
+
+    <!--根据商品表id删除商品信息-->
+    <delete id="deleteGoodsById" parameterType="int">
+        delete from goods where goods_id=#{goods_id}
+    </delete>
 
 </mapper>

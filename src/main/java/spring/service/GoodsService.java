@@ -22,4 +22,8 @@ public interface GoodsService {
 
     int addGoods(Goods goods);
 
+    int updateGoods(Goods goods);
+
+    int deleteGoodsById(int id);
+
 }
