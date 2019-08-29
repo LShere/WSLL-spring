@@ -196,5 +196,14 @@
     <delete id="deleteGoodsById" parameterType="int">
         delete from goods where goods_id=#{goods_id}
     </delete>
+    
+    <update id="updateGoodsPrcture" parameterType="int">
+        update goods
+
+        set goods_picture_path=#{goods_picture_path}
+
+        where goods_id=#{${goods_id}}
+
+    </update>
 
 </mapper>
