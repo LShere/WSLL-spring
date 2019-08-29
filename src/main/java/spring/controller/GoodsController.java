@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import spring.pojo.Goods;
@@ -59,7 +60,7 @@ public class GoodsController {
         Map<String, Object> map = new HashMap<String, Object>();
         List<Goods> goodsList = goodsService.findGoods(goods_type, goods_name, goods_describe);
         System.out.println(goodsList);
-        if (goodsList == null || goodsList.size() == 0 ) {
+        if (goodsList == null || goodsList.size() == 0) {
             map.put("code", 400);
             map.put("message", "不存在商品!");
             return map;
@@ -185,7 +186,7 @@ public class GoodsController {
     @GetMapping(value = "/addGoods")
     @ResponseBody
     public int addGoods(@RequestBody JSONObject jsonObject) {
-        Goods goods=new Goods();
+        Goods goods = new Goods();
 
         /*获取传入数据插入goods*/
         goods.setGoods_type(jsonObject.getString("goods_type"));
@@ -205,12 +206,20 @@ public class GoodsController {
         return rows;
     }
 
+    /*插入商品表的正确姿势*/
+    @PostMapping(value = "/addGood")
+    @ResponseBody
+    public int addGood(Goods goods) {
+        int rows = this.goodsService.addGoods(goods);
+        return rows;
+    }
+
     /*修改商品表信息*/
     @GetMapping(value = "/updateGoods")
     @ResponseBody
     public int updateFGoods(@RequestBody JSONObject jsonObject) {
 
-        Goods goods=new Goods();
+        Goods goods = new Goods();
 
         /*获取传入数据插入goods*/
         goods.setGoods_id(jsonObject.getInteger("goods_id"));
