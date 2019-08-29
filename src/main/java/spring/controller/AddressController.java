@@ -78,7 +78,7 @@ public class AddressController {
     @ResponseBody
     public String addAddress(@RequestBody JSONObject jsonObject){
         String address_id = jsonObject.getString("address_id");
-        String phone = jsonObject.getString("address_id");
+        String phone = jsonObject.getString("phone");
         String region = jsonObject.getJSONObject("address").getString("region");
         String detail = jsonObject.getJSONObject("address").getString("detail");
         String openid = jsonObject.getString("openid");
