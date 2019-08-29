@@ -1,22 +1,28 @@
 package spring.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import org.apache.commons.io.FilenameUtils;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.ibatis.annotations.Param;
 import org.eclipse.jetty.io.ssl.ALPNProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import spring.pojo.Goods;
 import spring.pojo.GoodsType;
 import spring.pojo.Page;
 import spring.service.GoodsService;
 import spring.service.GoodsTypeService;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FilenameFilter;
@@ -65,7 +71,7 @@ public class GoodsController {
         Map<String, Object> map = new HashMap<String, Object>();
         List<Goods> goodsList = goodsService.findGoods(goods_type, goods_name, goods_describe);
         System.out.println(goodsList);
-        if (goodsList == null || goodsList.size() == 0) {
+        if (goodsList == null || goodsList.size() == 0 ) {
             map.put("code", 400);
             map.put("message", "不存在商品!");
             return map;
@@ -191,7 +197,7 @@ public class GoodsController {
     @GetMapping(value = "/addGoods")
     @ResponseBody
     public int addGoods(@RequestBody JSONObject jsonObject) {
-        Goods goods = new Goods();
+        Goods goods=new Goods();
 
         /*获取传入数据插入goods*/
         goods.setGoods_type(jsonObject.getString("goods_type"));
@@ -211,12 +217,20 @@ public class GoodsController {
         return rows;
     }
 
+    /*插入商品表的正确姿势*/
+    @PostMapping(value = "/addGood")
+    @ResponseBody
+    public int addGood(Goods goods) {
+        int rows = this.goodsService.addGoods(goods);
+        return rows;
+    }
+
     /*修改商品表信息*/
     @GetMapping(value = "/updateGoods")
     @ResponseBody
     public int updateFGoods(@RequestBody JSONObject jsonObject) {
 
-        Goods goods = new Goods();
+        Goods goods=new Goods();
 
         /*获取传入数据插入goods*/
         goods.setGoods_id(jsonObject.getInteger("goods_id"));
