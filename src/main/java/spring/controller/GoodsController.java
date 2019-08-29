@@ -1,18 +1,16 @@
 package spring.controller;
 
+import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import org.apache.commons.io.FilenameUtils;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.ibatis.annotations.Param;
-import org.eclipse.jetty.io.ssl.ALPNProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import spring.pojo.Goods;
 import spring.pojo.GoodsType;
 import spring.pojo.Page;
@@ -25,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
