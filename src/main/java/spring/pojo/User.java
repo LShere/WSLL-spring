@@ -7,6 +7,7 @@ public class User {
     private String nickname;
     private String avatarUrl;
     private List<Comment> comments;
+    private List<Orders> orders;
 
     public User() {
     }
@@ -47,5 +48,13 @@ public class User {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public List<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
     }
 }

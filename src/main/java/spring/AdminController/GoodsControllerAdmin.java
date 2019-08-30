@@ -1,5 +1,6 @@
 package spring.AdminController;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientHandlerException;
@@ -14,6 +15,7 @@ import spring.pojo.Goods;
 import spring.pojo.Orders;
 import spring.service.GoodsService;
 import spring.service.OrdersService;
+import spring.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -27,6 +29,8 @@ public class GoodsControllerAdmin {
     private GoodsService goodsService;
     @Autowired
     private OrdersService ordersService;
+    @Autowired
+    private UserService userService;
 
     /*插入商品表的正确姿势*/
     @PostMapping(value = "addGood")
@@ -141,6 +145,29 @@ public class GoodsControllerAdmin {
 
         return ordersService.findOrdersByOpenid(openid, order_id);
     }
-
+    //查找所有的订单
+    @RequestMapping("/getAllOrdersAdmin")
+    @ResponseBody
+    public List getAllOrders(){
+        List list = userService.getAllOrdersAdmin();
+        return list;
+    }
+    //删除多个订单
+    @RequestMapping(value = "deleteMultiOrders")
+    @ResponseBody
+    public String deleteMultiOrders(@RequestBody JSONObject jsonObject){
+        int result = 0;
+        String temp = jsonObject.getString("deleteList");
+        String[] arr = temp.substring(1, temp.length() - 1).trim().split(",");
+        for(String item : arr){
+//            System.out.println(item.trim());
+            result += ordersService.deleteOrder(item.trim());
+        }
+        if (result > 0) {
+            return "success";
+        }else{
+            return "failed";
+        }
+    }
 
 }
