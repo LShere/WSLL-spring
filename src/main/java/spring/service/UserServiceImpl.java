@@ -30,4 +30,8 @@ public class UserServiceImpl implements UserService {
     public List getCommentList() {
         return userDao.getCommentList();
     }
+
+    public List getAllOrdersAdmin() {
+        return userDao.getAllOrdersAdmin();
+    }
 }

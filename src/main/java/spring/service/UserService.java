@@ -13,4 +13,5 @@ public interface UserService {
 
     public List getCommentList();
 
+    public List getAllOrdersAdmin();
 }

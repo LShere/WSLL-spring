@@ -10,6 +10,7 @@ import spring.pojo.Orders;
 import spring.service.CartService;
 import spring.service.GoodsOrdersService;
 import spring.service.OrdersService;
+import spring.service.UserService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +25,8 @@ public class OrdersController {
     GoodsOrdersService goodsOrdersService;
     @Autowired
     CartService cartService;
+    @Autowired
+    UserService userService;
 
     //根据用户id和订单id查找订单
     @RequestMapping(value = "/findOrdersByOpenid")
@@ -169,5 +172,12 @@ public class OrdersController {
         }else{
             return "收货失败";
         }
+    }
+    //查找所有的订单
+    @RequestMapping("/getAllOrdersAdmin")
+    @ResponseBody
+    public List getAllOrders(){
+        List list = userService.getAllOrdersAdmin();
+        return list;
     }
 }

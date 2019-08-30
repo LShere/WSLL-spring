@@ -73,5 +73,48 @@
 
     </select>
 
+<!--    查询所有订单(管理后台需要)-->
+    <resultMap id="getOrders" type="user">
+        <id property="openid" column="openid" />
+        <result property="nickname" column="nickname" />
+        <collection property="orders" ofType="orders">
+            <id property="order_id" column="order_id" />
+            <result property="openid" column="openid" />
+            <result property="pay_status" column="pay_status" />
+            <result property="pay_price" column="pay_price" />
+            <result property="create_time" column="create_time" />
+            <collection property="goodsOrdersList" ofType="goodsOrders">
+                <id property="id" column="id" />
+                <result property="goods_id" column="goods_id" />
+                <association property="goods" javaType="goods">
+                    <id property="goods_id" column="goods_id" />
+                    <result property="goods_picture_path" column="goods_picture_path" />
+                </association>
+            </collection>
+        </collection>
+    </resultMap>
+    <select id="getAllOrdersAdmin" resultMap="getOrders">
+            SELECT
+                u.openid,
+                u.nickname,
+                o.order_id,
+                o.pay_status,
+                o.pay_price,
+                o.create_time,
+                g.goods_picture_path,
+                og.goods_id
+            FROM
+                user u,
+                order_goods og ,
+                goods g ,
+                orders o
+            WHERE
+                u.openid = o.openid AND
+                o.order_id = og.order_id AND
+                og.goods_id = g.goods_id
+
+
+    </select>
+
 
 </mapper>
