@@ -25,7 +25,7 @@
         insert into orders values
         (#{order_id}, #{openid}, #{pay_status}, #{create_time}, #{pay_price})
     </insert>
-<!--    获得所有订单-->
+<!--    获得个人所有订单-->
     <resultMap id="goodsOrders" type="orders">
         <id property="order_id" column="order_id" />
         <result property="openid" column="openid" />
@@ -101,4 +101,5 @@
         </set>
         where order_id = #{order_id}
     </update>
+
 </mapper>

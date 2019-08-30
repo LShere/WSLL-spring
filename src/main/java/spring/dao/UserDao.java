@@ -16,4 +16,6 @@ public interface UserDao {
     public User findUserById(String openid);
 
     public List getCommentList();
+
+    public List getAllOrdersAdmin();
 }
